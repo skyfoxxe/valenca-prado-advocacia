@@ -3,9 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Projeto fictício de portfólio para o escritório Valença & Prado Advocacia." />
+  <meta name="description" content="Projeto conceitual de portfólio que demonstra uma landing page estratégica para advocacia empresarial em Cuiabá, MT, com SEO local, navegação por necessidade e WhatsApp contextual." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
   <meta name="theme-color" content="#111111" />
-  <title>Valença & Prado Advocacia</title>
+  <link rel="canonical" href="https://valencapradoadvocacia.vercel.app/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:title" content="Valença & Prado | Projeto conceitual de advocacia empresarial em Cuiabá" />
+  <meta property="og:description" content="Projeto conceitual: experiência digital estratégica para um escritório fictício de advocacia empresarial em Cuiabá, MT." />
+  <meta property="og:url" content="https://valencapradoadvocacia.vercel.app/" />
+  <title>Valença & Prado | Projeto conceitual de Advocacia Empresarial em Cuiabá</title>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "Valença & Prado — projeto conceitual de advocacia empresarial em Cuiabá",
+    "description": "Projeto conceitual de portfólio para demonstrar uma landing page estratégica, responsiva e preparada para SEO local.",
+    "creator": {"@type": "Person", "name": "Matheus Moreira"},
+    "spatialCoverage": {"@type": "Place", "name": "Cuiabá, Mato Grosso, Brasil"},
+    "about": [
+      {"@type": "Thing", "name": "Advocacia empresarial em Cuiabá"},
+      {"@type": "Thing", "name": "Design de landing page"},
+      {"@type": "Thing", "name": "SEO local"}
+    ]
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,6 +89,14 @@
         <span>Contencioso estratégico</span>
       </div>
     </section>
+
+
+    <aside class="concept-banner" aria-label="Aviso sobre o projeto">
+      <div class="container concept-banner-inner">
+        <strong>Projeto conceitual de portfólio.</strong>
+        <span>Valença & Prado, profissionais, OAB, contatos e endereço são fictícios. A página demonstra uma solução digital para advocacia em Cuiabá.</span>
+      </div>
+    </aside>
 
     <section class="section section-light intro">
       <div class="container editorial-grid">
@@ -157,6 +188,66 @@
             <h3>O futuro</h3>
             <p>Quais consequências aquela escolha pode produzir no médio e no longo prazo.</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section strategy-section" id="decisao">
+      <div class="container strategy-shell">
+        <div class="strategy-intro reveal">
+          <span class="eyebrow">Navegação estratégica</span>
+          <h2>O que está em jogo nesta decisão?</h2>
+          <p>Escolha o tema e o momento da questão. O conteúdo abaixo se adapta para mostrar uma atuação relacionada e preparar um primeiro contato mais objetivo.</p>
+          <p class="strategy-disclaimer">Demonstração de navegação. As opções abaixo não constituem diagnóstico ou orientação jurídica.</p>
+        </div>
+
+        <div class="decision-builder reveal" data-decision-builder>
+          <div class="decision-step">
+            <div class="decision-step-head">
+              <span>01</span>
+              <div><small>Tema</small><h3>Qual assunto mais se aproxima da sua questão?</h3></div>
+            </div>
+            <div class="decision-options" role="group" aria-label="Escolha o tema">
+              <button type="button" class="decision-option is-active" data-topic="empresa">Empresa</button>
+              <button type="button" class="decision-option" data-topic="contratos">Contratos</button>
+              <button type="button" class="decision-option" data-topic="patrimonio">Patrimônio</button>
+              <button type="button" class="decision-option" data-topic="conflitos">Conflitos</button>
+            </div>
+          </div>
+
+          <div class="decision-step">
+            <div class="decision-step-head">
+              <span>02</span>
+              <div><small>Momento</small><h3>Em que ponto essa questão está?</h3></div>
+            </div>
+            <div class="decision-options moment-options" role="group" aria-label="Escolha o momento">
+              <button type="button" class="decision-option is-active" data-moment="prevenir">Quero prevenir</button>
+              <button type="button" class="decision-option" data-moment="decidir">Preciso decidir</button>
+              <button type="button" class="decision-option" data-moment="reorganizar">Quero reorganizar</button>
+              <button type="button" class="decision-option" data-moment="resolver">Já existe conflito</button>
+            </div>
+          </div>
+
+          <div class="decision-result" aria-live="polite">
+            <div class="decision-result-meta">
+              <span class="decision-result-label">Caminho selecionado</span>
+              <span class="decision-result-code" data-result-code>Empresa · Prevenção</span>
+            </div>
+            <h3 data-result-title>Estruturar antes de assumir novos riscos.</h3>
+            <p data-result-text>Questões empresariais preventivas podem envolver estrutura societária, responsabilidades, relações entre sócios e decisões que afetam a continuidade do negócio.</p>
+            <div class="decision-result-grid">
+              <div>
+                <small>Atuação relacionada</small>
+                <strong data-result-practice>Direito Empresarial</strong>
+              </div>
+              <div>
+                <small>Primeiro olhar</small>
+                <strong data-result-first>Contexto, riscos e objetivos</strong>
+              </div>
+            </div>
+            <button type="button" class="btn btn-bronze wa-demo-trigger" data-wa-demo>Simular conversa no WhatsApp ↗</button>
+          </div>
         </div>
       </div>
     </section>
@@ -272,6 +363,39 @@
       </div>
     </section>
 
+
+    <section class="section section-local" id="cuiaba">
+      <div class="container local-grid">
+        <div class="local-copy reveal">
+          <span class="eyebrow dark">Cuiabá · Mato Grosso</span>
+          <h2>Advocacia empresarial com presença local em Cuiabá.</h2>
+          <p>Em um projeto real, informações de localização, área de atendimento e contato ajudam o visitante a compreender onde o escritório atua e também fortalecem a estrutura de SEO local do site.</p>
+          <div class="local-keywords" aria-label="Exemplos de temas locais trabalhados no conteúdo">
+            <span>Advocacia empresarial em Cuiabá</span>
+            <span>Contratos empresariais</span>
+            <span>Planejamento patrimonial</span>
+            <span>Assessoria jurídica em Mato Grosso</span>
+          </div>
+        </div>
+
+        <div class="location-card reveal">
+          <div class="map-demo" aria-hidden="true">
+            <span class="map-road road-a"></span>
+            <span class="map-road road-b"></span>
+            <span class="map-road road-c"></span>
+            <span class="map-marker"><i></i></span>
+            <span class="map-label">Centro Histórico</span>
+          </div>
+          <div class="location-meta">
+            <span class="contact-label">Endereço demonstrativo</span>
+            <h3>Praça da República, s/n</h3>
+            <p>Centro Norte · Cuiabá — MT</p>
+            <small>Endereço fictício/demonstrativo deste projeto conceitual. Não corresponde a um escritório real.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section section-stone" id="faq">
       <div class="container faq-grid">
         <div class="section-heading reveal">
@@ -328,11 +452,12 @@
 
         <div class="contact-card reveal">
           <span class="contact-label">Valença & Prado Advocacia</span>
-          <div class="contact-row"><span>Localização</span><strong>Cuiabá — MT</strong></div>
+          <div class="contact-row"><span>Localização</span><strong>Praça da República, s/n · Centro Norte · Cuiabá — MT*</strong></div>
           <div class="contact-row"><span>Telefone</span><strong>(65) 0000-0000</strong></div>
-          <div class="contact-row"><span>E-mail</span><strong>contato@valencaepardo.com.br</strong></div>
+          <div class="contact-row"><span>E-mail</span><strong>contato@valencaeprado.com.br</strong></div>
           <div class="contact-row"><span>Atendimento</span><strong>Mediante agendamento</strong></div>
-          <a class="btn btn-bronze full" href="mailto:contato@valencaepardo.com.br">Entrar em contato</a>
+          <button type="button" class="btn btn-bronze full wa-demo-trigger" data-wa-demo>Simular contato pelo WhatsApp ↗</button>
+          <small class="contact-fiction-note">* Endereço, telefone e e-mail são demonstrativos deste projeto conceitual.</small>
         </div>
       </div>
     </section>
@@ -360,6 +485,26 @@
     <span>Contato</span>
     <span>↗</span>
   </a>
+
+
+  <div class="wa-modal" data-wa-modal hidden>
+    <div class="wa-modal-backdrop" data-wa-close></div>
+    <section class="wa-modal-card" role="dialog" aria-modal="true" aria-labelledby="wa-modal-title">
+      <button type="button" class="wa-modal-close" data-wa-close aria-label="Fechar">×</button>
+      <span class="contact-label">Demonstração de WhatsApp contextual</span>
+      <h2 id="wa-modal-title">O primeiro contato já chega com contexto.</h2>
+      <p>Em um site real, este botão abriria o WhatsApp do escritório com uma mensagem relacionada às escolhas feitas pelo visitante.</p>
+      <div class="wa-message-preview">
+        <small>Mensagem preparada</small>
+        <p data-wa-message>Olá. Conheci o escritório pelo site e gostaria de conversar sobre uma questão empresarial preventiva.</p>
+      </div>
+      <div class="wa-modal-actions">
+        <button type="button" class="btn btn-bronze" data-copy-message>Copiar mensagem</button>
+        <button type="button" class="btn btn-outline" data-wa-close>Fechar demonstração</button>
+      </div>
+      <small class="strategy-disclaimer">Projeto conceitual: nenhum contato é enviado e nenhum escritório real é representado.</small>
+    </section>
+  </div>
 
   <script src="script.js"></script>
 </body>
