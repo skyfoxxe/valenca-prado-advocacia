@@ -1,34 +1,41 @@
-# Valença & Prado — Estratégico v2
+# Valença & Prado — v4 (quiet luxury)
 
-Projeto conceitual de portfólio. O escritório, os profissionais, OAB, telefone, e-mail e endereço exibidos são fictícios/demonstrativos.
+Projeto conceitual de portfólio. O escritório, os profissionais, os números de OAB, o telefone, o e-mail e o endereço exibidos são fictícios.
 
-## O que mudou nesta versão
-- experiência estratégica de navegação por **tema + momento da decisão**;
-- conteúdo que muda conforme a escolha do visitante;
-- demonstração de **WhatsApp contextual** sem enviar mensagem para um número real;
-- seção de presença local em **Cuiabá — MT** com endereço explicitamente demonstrativo;
-- SEO local on-page, Open Graph, `robots.txt` e `sitemap.xml`;
-- dados estruturados como `CreativeWork` (e não `LegalService`) para não representar o escritório fictício como negócio real;
-- áreas usadas nos screenshots anteriores (`#escritorio` e `#socios`) preservadas.
+Site estático: `index.html`, `styles.css`, `script.js` e imagens em `assets/`. Não há build.
 
-## Endereço demonstrativo
-Praça da República, s/n — Centro Norte — Cuiabá/MT.
+## Estrutura da página
+1. Abertura, com índice das quatro áreas
+2. Perspectiva (atuação consultiva e preventiva)
+3. Áreas de atuação
+4. Por onde começar: escolha de tema + momento, que prepara a mensagem de WhatsApp
+5. Como trabalhamos (método e princípios)
+6. O escritório (`#escritorio`) e para quem atua
+7. Sócios (`#socios`)
+8. Dúvidas frequentes
+9. Contato e rodapé com os dados de registro
 
-## Antes de usar para um cliente real
-Trocar dados fictícios, domínio/canonical, sitemap, endereço e contatos. Para um escritório real, só então avaliar dados estruturados de negócio local e Perfil da Empresa no Google.
+As âncoras `#escritorio` e `#socios` foram mantidas para os prints do portfólio.
 
-## V3 — movimento editorial do pacote Estratégico
+## Cuidados com a publicidade da advocacia
+O texto foi revisado tendo como referência o Código de Ética e Disciplina da OAB (arts. 39 a 47) e o Provimento 205/2021 do CFOAB:
+- tom informativo e sóbrio, sem promessa de resultado, sem comparação com outros escritórios e sem menção a valores;
+- nenhum depoimento, caso, cliente ou número de resultado;
+- o orientador "Por onde começar" informa a área relacionada e deixa claro que não é diagnóstico nem orientação jurídica;
+- o rodapé traz o nome da sociedade, o campo de registro na OAB e o aviso de caráter informativo;
+- as imagens mostram apenas ambientes neutros, sem ostentação.
 
-Esta versão acrescenta microinterações discretas sem alterar o estado estático das seções já usadas nos screenshots do portfólio:
+## Antes de usar para um escritório real
+Todos os campos marcados com `data-placeholder` no `index.html` precisam de dados reais:
+- `oab`: nome completo e número de inscrição de cada sócio;
+- `registro-sociedade`: razão social e número de registro da sociedade na OAB/MT;
+- `endereco`, `telefone`, `email`;
+- retratos dos sócios (hoje são placas com as iniciais e o aviso "Retrato a definir");
+- `WHATSAPP_NUMBER` em `script.js` (vazio = modo demonstração; preenchido, o botão abre o WhatsApp com a mensagem);
+- domínio no `canonical`, no Open Graph, no `sitemap.xml` e no `robots.txt`;
+- remover o aviso de projeto conceitual e as notas de dados fictícios;
+- confirmar com o escritório as áreas, os temas listados em cada área, o atendimento fora de Cuiabá e o "com hora marcada";
+- só então trocar o JSON-LD `CreativeWork` por `LegalService`.
 
-- parallax de poucos pixels no hero em desktop;
-- leve resposta de perspectiva nos cards e opções de decisão;
-- luz ambiente que acompanha o cursor somente na experiência estratégica;
-- transição por crossfade quando o visitante muda suas escolhas;
-- zoom mínimo em imagens durante hover;
-- links com sublinhado editorial animado;
-- botões com microinteração de preenchimento;
-- linhas de destaque que surgem quando o conteúdo entra na viewport;
-- suporte a `prefers-reduced-motion` e efeitos de mouse desativados em dispositivos sem cursor preciso.
-
-A intenção é reforçar a percepção de projeto Estratégico por meio da experiência, sem usar efeitos decorativos chamativos.
+## Imagens
+Fotos de ambientes vindas da versão publicada anterior (originalmente do Unsplash), convertidas para WebP e servidas localmente.
