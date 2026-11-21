@@ -1,43 +1,42 @@
-// Valença & Prado — v4
-// Para um escritório real: preencha com o número no formato internacional,
-// só dígitos (ex.: '5565999999999'). Vazio = modo demonstração.
+// Valença & Prado — v5
+// Para um escritório real, preencha (só dígitos, com DDI e DDD, ex.: '5565999999999')
+// e o e-mail. Vazios = modo demonstração.
 const WHATSAPP_NUMBER = '';
+const CONTACT_EMAIL = '';
 
-document.documentElement.classList.add('js');
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ---------- Menu ----------
-const menuToggle = document.querySelector('.menu-toggle');
-const nav = document.querySelector('.main-nav');
-if (menuToggle && nav) {
+const toggle = document.querySelector('.menu-toggle');
+const menu = document.querySelector('.menu');
+if (toggle && menu) {
+  const label = toggle.querySelector('span');
   const setMenu = open => {
-    nav.classList.toggle('is-open', open);
-    menuToggle.setAttribute('aria-expanded', String(open));
-    menuToggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    menu.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    if (label) label.textContent = open ? 'Fechar' : 'Menu';
   };
-  menuToggle.addEventListener('click', () => setMenu(!nav.classList.contains('is-open')));
-  nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+  toggle.addEventListener('click', () => setMenu(!menu.classList.contains('is-open')));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 }
 
-// ---------- Revelação suave ----------
+// ---------- Revelação ----------
 const revealEls = document.querySelectorAll('.reveal');
 if (!reduced && 'IntersectionObserver' in window) {
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        io.unobserve(entry.target);
-      }
+      if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
   revealEls.forEach(el => io.observe(el));
 } else {
   revealEls.forEach(el => el.classList.add('is-visible'));
 }
 
-// ---------- Orientador: tema + momento ----------
-const guideData = {
+// ---------- Pré-atendimento ----------
+const DATA = {
   topics: {
     empresa: {
       label: 'Empresa', practice: 'Direito Empresarial', first: 'Contexto, riscos e objetivos',
@@ -60,7 +59,7 @@ const guideData = {
       }
     },
     patrimonio: {
-      label: 'Patrimônio', practice: 'Planejamento Patrimonial e Sucessório', first: 'Bens, pessoas e continuidade',
+      label: 'Patrimônio', practice: 'Patrimonial e Sucessório', first: 'Bens, pessoas e continuidade',
       text: 'Decisões patrimoniais e sucessórias exigem olhar conjunto para os bens, as relações familiares ou empresariais e os efeitos que se estendem no tempo.',
       titles: {
         prevenir: 'Organizar hoje o que precisa continuar amanhã.',
@@ -85,104 +84,102 @@ const guideData = {
     decidir: { label: 'Decisão', phrase: 'Estou diante de uma decisão e gostaria de entender os aspectos jurídicos envolvidos.' },
     reorganizar: { label: 'Reorganização', phrase: 'Quero reorganizar uma situação existente e avaliar alternativas.' },
     resolver: { label: 'Conflito existente', phrase: 'Já existe um conflito e gostaria de apresentar o contexto para uma avaliação inicial.' }
+  },
+  replies: {
+    whatsapp: { phrase: 'Prefiro retorno pelo WhatsApp.', button: 'Enviar pelo WhatsApp' },
+    telefone: { phrase: 'Prefiro retorno por ligação.', button: 'Enviar pelo WhatsApp' },
+    email: { phrase: 'Prefiro retorno por e-mail.', button: 'Enviar por e-mail' }
   }
 };
 
-const guide = document.querySelector('[data-guide]');
-const result = document.querySelector('.guide-result');
-const out = {
-  code: document.querySelector('[data-result-code]'),
-  title: document.querySelector('[data-result-title]'),
-  text: document.querySelector('[data-result-text]'),
-  practice: document.querySelector('[data-result-practice]'),
-  first: document.querySelector('[data-result-first]')
-};
-Object.values(out).forEach(el => el && el.setAttribute('data-swap', ''));
+const form = document.querySelector('[data-intake]');
+const brief = document.querySelector('.brief');
+const sendBtn = document.querySelector('[data-send]');
 
-const selected = () => ({
-  topic: guide?.querySelector('input[name="tema"]:checked')?.value || 'empresa',
-  moment: guide?.querySelector('input[name="momento"]:checked')?.value || 'prevenir'
-});
-
-function currentMessage() {
-  const { topic, moment } = selected();
-  const t = guideData.topics[topic];
-  const m = guideData.moments[moment];
-  return `Olá. Conheci a Valença & Prado pelo site. Minha questão está relacionada a ${t.label.toLowerCase()}. ${m.phrase}`;
+function state() {
+  const v = name => form?.querySelector(`input[name="${name}"]:checked`)?.value;
+  const nome = (form?.querySelector('input[name="nome"]')?.value || '').trim().replace(/\s+/g, ' ');
+  return { topic: v('tema') || 'empresa', moment: v('momento') || 'prevenir', reply: v('retorno') || 'whatsapp', nome };
 }
 
-function renderGuide(animate) {
-  const { topic, moment } = selected();
-  const t = guideData.topics[topic];
-  const m = guideData.moments[moment];
+function buildMessage(s = state()) {
+  const t = DATA.topics[s.topic];
+  const greeting = s.nome ? `Olá, meu nome é ${s.nome}.` : 'Olá.';
+  return `${greeting} Conheci a Valença & Prado pelo site. Minha questão está relacionada a ${t.label.toLowerCase()}. ${DATA.moments[s.moment].phrase} ${DATA.replies[s.reply].phrase}`;
+}
+
+function setOut(key, value) {
+  document.querySelectorAll(`[data-out="${key}"]`).forEach(el => { el.textContent = value; });
+}
+
+function render(animate) {
+  const s = state();
+  const t = DATA.topics[s.topic];
   const apply = () => {
-    out.code.textContent = `${t.label} · ${m.label}`;
-    out.title.textContent = t.titles[moment];
-    out.text.textContent = t.text;
-    out.practice.textContent = t.practice;
-    out.first.textContent = t.first;
+    setOut('code', `${t.label} · ${DATA.moments[s.moment].label}`);
+    setOut('title', t.titles[s.moment]);
+    setOut('text', t.text);
+    setOut('practice', t.practice);
+    setOut('first', t.first);
+    setOut('message', buildMessage());
+    if (sendBtn) sendBtn.textContent = DATA.replies[s.reply].button;
   };
-  if (animate && !reduced && result) {
-    result.classList.add('is-changing');
-    setTimeout(() => { apply(); result.classList.remove('is-changing'); }, 220);
+  if (animate && !reduced && brief) {
+    brief.classList.add('is-changing');
+    setTimeout(() => { apply(); brief.classList.remove('is-changing'); }, 200);
   } else {
     apply();
   }
 }
 
-if (guide) {
-  guide.addEventListener('change', () => renderGuide(true));
-  renderGuide(false);
+if (form) {
+  form.addEventListener('change', () => render(true));
+  form.addEventListener('input', e => { if (e.target.name === 'nome') setOut('message', buildMessage()); });
+  form.addEventListener('submit', e => e.preventDefault());
+  render(false);
 }
 
-// ---------- WhatsApp contextual ----------
-const dialog = document.querySelector('[data-wa-dialog]');
-const msgEl = document.querySelector('[data-wa-message]');
-const sendBtn = document.querySelector('[data-wa-send]');
-const noteEl = document.querySelector('[data-wa-note]');
-
-if (WHATSAPP_NUMBER && sendBtn) {
-  sendBtn.textContent = 'Abrir no WhatsApp';
-  if (noteEl) noteEl.textContent = 'O WhatsApp abre com esta mensagem. Você pode editá-la antes de enviar.';
-}
-
-document.querySelectorAll('[data-wa-open]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    if (msgEl) msgEl.textContent = currentMessage();
-    if (dialog && typeof dialog.showModal === 'function') dialog.showModal();
-  });
-});
-
-if (dialog) {
-  dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
-}
-
+// ---------- Envio (real ou demonstração) ----------
+const dialog = document.querySelector('[data-dialog]');
 if (sendBtn) {
-  sendBtn.addEventListener('click', async () => {
-    const message = currentMessage();
-    if (WHATSAPP_NUMBER) {
+  sendBtn.addEventListener('click', () => {
+    const s = state();
+    const message = buildMessage(s);
+    if (s.reply === 'email' && CONTACT_EMAIL) {
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Pré-atendimento pelo site')}&body=${encodeURIComponent(message)}`;
+      return;
+    }
+    if (s.reply !== 'email' && WHATSAPP_NUMBER) {
       window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
       return;
     }
-    const original = 'Copiar mensagem';
+    setOut('message', message);
+    if (dialog && typeof dialog.showModal === 'function') dialog.showModal();
+  });
+}
+if (dialog) dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
+
+const copyBtn = document.querySelector('[data-copy]');
+if (copyBtn) {
+  copyBtn.addEventListener('click', async () => {
     try {
-      await navigator.clipboard.writeText(message);
-      sendBtn.textContent = 'Mensagem copiada';
+      await navigator.clipboard.writeText(buildMessage());
+      copyBtn.textContent = 'Mensagem copiada';
     } catch {
-      sendBtn.textContent = 'Selecione o texto para copiar';
+      copyBtn.textContent = 'Selecione o texto para copiar';
     }
-    setTimeout(() => { sendBtn.textContent = original; }, 2000);
+    setTimeout(() => { copyBtn.textContent = 'Copiar mensagem'; }, 2000);
   });
 }
 
-// ---------- Atalho de contato some onde já há contato visível ----------
-const floatBtn = document.querySelector('.contact-float');
-const hideZones = document.querySelectorAll('.hero, #contato, .site-footer');
-if (floatBtn && 'IntersectionObserver' in window) {
+// ---------- Atalho flutuante some onde já existe chamada visível ----------
+const floatCta = document.querySelector('.float-cta');
+const zones = document.querySelectorAll('.hero, #pre-atendimento, #contato, .site-footer');
+if (floatCta && 'IntersectionObserver' in window) {
   const visible = new Set();
   const zo = new IntersectionObserver(entries => {
-    entries.forEach(e => e.isIntersecting ? visible.add(e.target) : visible.delete(e.target));
-    floatBtn.classList.toggle('is-hidden', visible.size > 0);
-  }, { threshold: 0.05 });
-  hideZones.forEach(z => zo.observe(z));
+    entries.forEach(e => (e.isIntersecting ? visible.add(e.target) : visible.delete(e.target)));
+    floatCta.classList.toggle('is-hidden', visible.size > 0);
+  }, { threshold: 0.04 });
+  zones.forEach(z => zo.observe(z));
 }

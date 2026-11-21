@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Projeto conceitual de portfólio: site para um escritório fictício de advocacia empresarial e patrimonial em Cuiabá, MT, com navegação por tema e contato contextual." />
+  <meta name="description" content="Projeto conceitual de portfólio: site para um escritório fictício de advocacia empresarial e patrimonial em Cuiabá, MT, com pré-atendimento por tema e momento." />
   <meta name="robots" content="index,follow,max-image-preview:large" />
-  <meta name="theme-color" content="#141311" />
+  <meta name="theme-color" content="#1f2e27" />
   <link rel="canonical" href="https://valencapradoadvocacia.vercel.app/" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="pt_BR" />
@@ -20,7 +20,7 @@
     "@context": "https://schema.org",
     "@type": "CreativeWork",
     "name": "Valença & Prado — projeto conceitual de advocacia empresarial em Cuiabá",
-    "description": "Projeto conceitual de portfólio que demonstra um site responsivo para advocacia, preparado para SEO local.",
+    "description": "Projeto conceitual de portfólio que demonstra um site responsivo para advocacia, com pré-atendimento estruturado e preparado para SEO local.",
     "creator": {"@type": "Person", "name": "Matheus Moreira"},
     "spatialCoverage": {"@type": "Place", "name": "Cuiabá, Mato Grosso, Brasil"},
     "about": [
@@ -33,7 +33,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital@0;1&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css" />
   <script>document.documentElement.classList.add('js')</script>
@@ -42,26 +42,23 @@
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <header class="site-header" id="topo">
-    <div class="container nav-wrap">
-      <a class="brand" href="#topo" aria-label="Valença & Prado, início">
-        <span class="brand-mark" aria-hidden="true">V<i>&amp;</i>P</span>
-        <span class="brand-copy">
-          <strong>Valença &amp; Prado</strong>
-          <small>Advocacia</small>
-        </span>
+    <div class="wrap nav">
+      <a class="wordmark" href="#topo" aria-label="Valença & Prado, início">
+        Valença <i>&amp;</i> Prado
+        <small>Advocacia</small>
       </a>
 
-      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-nav">
-        <span></span><span></span>
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
+        <span>Menu</span>
       </button>
 
-      <nav class="main-nav" id="main-nav" aria-label="Navegação principal">
+      <nav class="menu" id="menu" aria-label="Navegação principal">
         <a href="#atuacao">Atuação</a>
-        <a href="#metodo">Como trabalhamos</a>
+        <a href="#pre-atendimento">Pré-atendimento</a>
         <a href="#escritorio">Escritório</a>
         <a href="#socios">Sócios</a>
         <a href="#faq">Dúvidas</a>
-        <a class="nav-cta" href="#contato">Contato</a>
+        <a class="menu-cta" href="#contato">Contato</a>
       </nav>
     </div>
   </header>
@@ -69,313 +66,293 @@
   <main id="conteudo">
 
     <!-- Abertura -->
-    <section class="hero tone-dark">
-      <div class="container hero-grid">
-        <div class="hero-copy reveal">
-          <p class="eyebrow">Advocacia empresarial e patrimonial · Cuiabá, MT</p>
-          <h1>Decisões jurídicas pedem mais do que respostas. Pedem <em>contexto</em>.</h1>
-          <p class="lead">Assessoria jurídica para empresas, sócios e famílias em decisões que envolvem negócios, patrimônio e continuidade.</p>
-          <div class="hero-actions">
-            <a class="btn btn-bronze" href="#contato">Falar com o escritório</a>
-            <a class="text-link" href="#atuacao">Áreas de atuação</a>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="kicker reveal">Advocacia empresarial e patrimonial <span>Cuiabá · MT</span></p>
+          <h1 class="reveal">Antes da decisão, <em>o contexto.</em></h1>
+          <p class="hero-lead reveal">Assessoria jurídica para empresas, sócios e famílias em decisões que envolvem negócios, patrimônio e continuidade.</p>
+          <div class="hero-actions reveal">
+            <a class="btn btn-solid" href="#pre-atendimento">Iniciar pré-atendimento</a>
+            <a class="link-quiet" href="#atuacao">Áreas de atuação</a>
           </div>
         </div>
 
-        <figure class="hero-media reveal">
-          <img src="assets/escritorio-corredor.webp" width="1400" height="935" alt="Corredor de escritório com divisórias de vidro e piso claro" fetchpriority="high">
+        <figure class="hero-photo photo reveal">
+          <img src="assets/escritorio-corredor.webp" width="1400" height="935" alt="Corredor de escritório com divisórias de vidro" fetchpriority="high">
+          <figcaption>Valença &amp; Prado · Cuiabá</figcaption>
         </figure>
       </div>
 
-      <div class="container hero-index reveal" aria-label="Áreas do escritório">
-        <a href="#area-empresarial"><span>01</span>Empresarial</a>
-        <a href="#area-societario"><span>02</span>Societário e contratos</a>
-        <a href="#area-patrimonial"><span>03</span>Patrimonial e sucessório</a>
-        <a href="#area-contencioso"><span>04</span>Contencioso</a>
+      <div class="wrap concept reveal" role="note">
+        <p><strong>Projeto conceitual de portfólio.</strong> O escritório, os profissionais, os números de OAB, os contatos e o endereço são fictícios.</p>
       </div>
     </section>
 
-    <aside class="concept-note" aria-label="Aviso sobre o projeto">
-      <div class="container">
-        <p><strong>Projeto conceitual de portfólio.</strong> O escritório Valença &amp; Prado, os profissionais, os números de OAB, os contatos e o endereço são fictícios.</p>
-      </div>
-    </aside>
-
-    <!-- Perspectiva -->
-    <section class="section tone-ivory" id="perspectiva">
-      <div class="container split">
-        <div class="split-head reveal">
-          <p class="eyebrow">Perspectiva</p>
-          <h2>Muitas das decisões jurídicas mais importantes acontecem antes de qualquer conflito.</h2>
-        </div>
-        <div class="split-body reveal">
-          <p>Na estruturação de uma sociedade, na assinatura de um contrato, na reorganização de um patrimônio ou na preparação de uma sucessão. São momentos em que uma análise cuidadosa permite enxergar riscos e alternativas com mais clareza.</p>
-          <p>Por isso, o trabalho do escritório começa pela compreensão do contexto: como o negócio funciona, quais pessoas e bens estão envolvidos e que efeitos cada escolha pode produzir com o tempo.</p>
-        </div>
-      </div>
-
-      <div class="container framed reveal">
-        <figure class="framed-media">
-          <img src="assets/sala-de-reuniao.webp" width="1300" height="868" alt="Sala de reuniões com mesa longa e janelas amplas" loading="lazy">
-        </figure>
-        <div class="framed-caption">
-          <p class="eyebrow">Atuação consultiva e preventiva</p>
-          <p>O Direito não precisa entrar apenas quando o problema já existe. Uma estrutura jurídica bem pensada pode ajudar a tomar decisões com mais segurança.</p>
+    <!-- Princípio -->
+    <section class="section principle">
+      <div class="wrap doc">
+        <aside class="margin reveal"><span class="sec">§</span>Princípio</aside>
+        <div class="doc-body">
+          <p class="statement reveal">Muitas das decisões jurídicas mais importantes acontecem antes de qualquer conflito: na estruturação de uma sociedade, na assinatura de um contrato, na reorganização de um patrimônio ou na preparação de uma sucessão.</p>
+          <div class="cols reveal">
+            <p>São momentos em que uma análise cuidadosa permite enxergar riscos e alternativas com mais clareza. Por isso, o trabalho do escritório começa pela compreensão do contexto.</p>
+            <p>Como o negócio funciona, quais pessoas e bens estão envolvidos e que efeitos cada escolha pode produzir com o tempo. Só depois vem a resposta.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Áreas de atuação -->
-    <section class="section tone-dark" id="atuacao">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">Áreas de atuação</p>
-          <h2>Conhecimento jurídico aplicado a decisões relevantes.</h2>
-        </div>
+    <!-- I. Atuação -->
+    <section class="section areas" id="atuacao">
+      <div class="wrap doc">
+        <aside class="margin reveal"><span class="sec">I</span>Atuação</aside>
+        <div class="doc-body">
+          <h2 class="reveal">Quatro áreas, uma mesma forma de olhar.</h2>
 
-        <ol class="practice-list">
-          <li class="practice reveal" id="area-empresarial">
-            <span class="practice-num">01</span>
-            <h3>Direito Empresarial</h3>
-            <div class="practice-body">
+          <div class="area-list">
+            <article class="area reveal" id="area-empresarial">
+              <p class="area-num">1.1</p>
+              <h3>Direito Empresarial</h3>
               <p>Assessoria a empresas e empresários em decisões que afetam a operação, a estrutura e a continuidade do negócio.</p>
-              <p class="practice-topics">Estrutura da empresa · Responsabilidade de administradores · Reorganizações</p>
-            </div>
-          </li>
-          <li class="practice reveal" id="area-societario">
-            <span class="practice-num">02</span>
-            <h3>Societário e Contratos</h3>
-            <div class="practice-body">
+              <p class="area-topics">Estrutura da empresa · Responsabilidade de administradores · Reorganizações</p>
+            </article>
+            <article class="area reveal" id="area-societario">
+              <p class="area-num">1.2</p>
+              <h3>Societário e Contratos</h3>
               <p>Estruturação e revisão de relações societárias e contratuais, com atenção aos interesses envolvidos e aos efeitos futuros.</p>
-              <p class="practice-topics">Contrato social · Acordo de sócios · Entrada e saída de sócios · Contratos empresariais</p>
-            </div>
-          </li>
-          <li class="practice reveal" id="area-patrimonial">
-            <span class="practice-num">03</span>
-            <h3>Planejamento Patrimonial e Sucessório</h3>
-            <div class="practice-body">
+              <p class="area-topics">Contrato social · Acordo de sócios · Entrada e saída de sócios · Contratos empresariais</p>
+            </article>
+            <article class="area reveal" id="area-patrimonial">
+              <p class="area-num">1.3</p>
+              <h3>Patrimonial e Sucessório</h3>
               <p>Organização jurídica do patrimônio e preparação da sucessão, de forma estruturada e individualizada.</p>
-              <p class="practice-topics">Organização patrimonial · Holding familiar · Testamento e doação · Inventário</p>
-            </div>
-          </li>
-          <li class="practice reveal" id="area-contencioso">
-            <span class="practice-num">04</span>
-            <h3>Contencioso Estratégico</h3>
-            <div class="practice-body">
+              <p class="area-topics">Organização patrimonial · Holding familiar · Testamento e doação · Inventário</p>
+            </article>
+            <article class="area reveal" id="area-contencioso">
+              <p class="area-num">1.4</p>
+              <h3>Contencioso Estratégico</h3>
               <p>Atuação em disputas empresariais e patrimoniais que exigem análise de risco, estratégia processual e acompanhamento próximo.</p>
-              <p class="practice-topics">Disputas societárias · Disputas contratuais · Conflitos patrimoniais · Vias consensuais</p>
-            </div>
-          </li>
-        </ol>
+              <p class="area-topics">Disputas societárias · Disputas contratuais · Conflitos patrimoniais · Vias consensuais</p>
+            </article>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Orientador por tema e momento -->
-    <section class="section tone-stone" id="decisao">
-      <div class="container guide">
-        <div class="guide-intro reveal">
-          <p class="eyebrow">Por onde começar</p>
-          <h2>O que está em jogo na sua questão?</h2>
-          <p>Escolha o tema e o momento. O texto ao lado indica a área relacionada e prepara uma primeira mensagem mais objetiva para o escritório.</p>
-          <p class="fine-print">Ferramenta de orientação para o primeiro contato. Não constitui diagnóstico nem orientação jurídica sobre o seu caso.</p>
-        </div>
+    <!-- II. Pré-atendimento -->
+    <section class="section intake" id="pre-atendimento">
+      <div class="wrap doc">
+        <aside class="margin reveal"><span class="sec">II</span>Pré-atendimento</aside>
+        <div class="doc-body">
+          <div class="intake-head reveal">
+            <h2>Organize a sua questão antes do primeiro contato.</h2>
+            <p>Três escolhas rápidas preparam uma mensagem objetiva para o escritório. Nada é enviado sem a sua confirmação.</p>
+          </div>
 
-        <div class="guide-panel reveal" data-guide>
-          <fieldset class="guide-step">
-            <legend><span>01</span>Tema</legend>
-            <div class="chips">
-              <label class="chip"><input type="radio" name="tema" value="empresa" checked><span>Empresa</span></label>
-              <label class="chip"><input type="radio" name="tema" value="contratos"><span>Contratos</span></label>
-              <label class="chip"><input type="radio" name="tema" value="patrimonio"><span>Patrimônio</span></label>
-              <label class="chip"><input type="radio" name="tema" value="conflitos"><span>Conflitos</span></label>
-            </div>
-          </fieldset>
+          <div class="intake-grid">
+            <form class="intake-form reveal" data-intake novalidate>
+              <fieldset>
+                <legend><span>01</span>Qual assunto mais se aproxima da sua questão?</legend>
+                <div class="options">
+                  <label><input type="radio" name="tema" value="empresa" checked><span>Empresa</span></label>
+                  <label><input type="radio" name="tema" value="contratos"><span>Contratos</span></label>
+                  <label><input type="radio" name="tema" value="patrimonio"><span>Patrimônio</span></label>
+                  <label><input type="radio" name="tema" value="conflitos"><span>Conflitos</span></label>
+                </div>
+              </fieldset>
 
-          <fieldset class="guide-step">
-            <legend><span>02</span>Momento</legend>
-            <div class="chips">
-              <label class="chip"><input type="radio" name="momento" value="prevenir" checked><span>Quero prevenir</span></label>
-              <label class="chip"><input type="radio" name="momento" value="decidir"><span>Preciso decidir</span></label>
-              <label class="chip"><input type="radio" name="momento" value="reorganizar"><span>Quero reorganizar</span></label>
-              <label class="chip"><input type="radio" name="momento" value="resolver"><span>Já existe conflito</span></label>
-            </div>
-          </fieldset>
+              <fieldset>
+                <legend><span>02</span>Em que ponto ela está?</legend>
+                <div class="options">
+                  <label><input type="radio" name="momento" value="prevenir" checked><span>Quero prevenir</span></label>
+                  <label><input type="radio" name="momento" value="decidir"><span>Preciso decidir</span></label>
+                  <label><input type="radio" name="momento" value="reorganizar"><span>Quero reorganizar</span></label>
+                  <label><input type="radio" name="momento" value="resolver"><span>Já existe conflito</span></label>
+                </div>
+              </fieldset>
 
-          <div class="guide-result" aria-live="polite">
-            <p class="guide-code" data-result-code>Empresa · Prevenção</p>
-            <h3 data-result-title>Estruturar antes de assumir novos riscos.</h3>
-            <p data-result-text>Questões empresariais podem envolver estrutura, responsabilidades, relações entre sócios e decisões que afetam a operação e a continuidade do negócio.</p>
-            <dl class="guide-meta">
-              <div><dt>Área relacionada</dt><dd data-result-practice>Direito Empresarial</dd></div>
-              <div><dt>Primeira conversa</dt><dd data-result-first>Contexto, riscos e objetivos</dd></div>
-            </dl>
-            <button type="button" class="btn btn-ink" data-wa-open>Preparar mensagem no WhatsApp</button>
+              <fieldset>
+                <legend><span>03</span>Como prefere o retorno?</legend>
+                <div class="options">
+                  <label><input type="radio" name="retorno" value="whatsapp" checked><span>WhatsApp</span></label>
+                  <label><input type="radio" name="retorno" value="telefone"><span>Ligação</span></label>
+                  <label><input type="radio" name="retorno" value="email"><span>E-mail</span></label>
+                </div>
+                <label class="field">
+                  <span>Seu nome <small>(opcional)</small></span>
+                  <input type="text" name="nome" autocomplete="name" maxlength="60" placeholder="Como devemos chamar você">
+                </label>
+              </fieldset>
+            </form>
+
+            <aside class="brief reveal" aria-live="polite">
+              <p class="brief-label">Resumo para o escritório</p>
+              <p class="brief-code" data-out="code">Empresa · Prevenção</p>
+              <h3 data-out="title">Estruturar antes de assumir novos riscos.</h3>
+              <p class="brief-text" data-out="text">Questões empresariais podem envolver estrutura, responsabilidades, relações entre sócios e decisões que afetam a operação e a continuidade do negócio.</p>
+              <dl>
+                <div><dt>Área relacionada</dt><dd data-out="practice">Direito Empresarial</dd></div>
+                <div><dt>Primeira conversa</dt><dd data-out="first">Contexto, riscos e objetivos</dd></div>
+              </dl>
+              <blockquote class="brief-message" data-out="message">Olá. Conheci a Valença &amp; Prado pelo site. Minha questão está relacionada a empresa. Meu objetivo é prevenir problemas antes de tomar uma decisão. Prefiro retorno pelo WhatsApp.</blockquote>
+              <button type="button" class="btn btn-solid btn-block" data-send>Enviar pelo WhatsApp</button>
+              <p class="fine">Não inclua documentos, valores ou detalhes sigilosos nesta mensagem. O resumo serve apenas para orientar o primeiro contato e não constitui diagnóstico nem orientação jurídica.</p>
+            </aside>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Método -->
-    <section class="section tone-ivory" id="metodo">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">Como trabalhamos</p>
-          <h2>Da questão jurídica à decisão.</h2>
+    <section class="section method">
+      <div class="wrap doc">
+        <aside class="margin reveal"><span class="sec">§</span>Método</aside>
+        <div class="doc-body">
+          <h2 class="reveal">Da questão jurídica à decisão.</h2>
+          <ol class="steps">
+            <li class="reveal"><span>a</span><h3>Compreensão</h3><p>Entender o negócio, as pessoas envolvidas, os bens em questão e os objetivos.</p></li>
+            <li class="reveal"><span>b</span><h3>Análise</h3><p>Identificar riscos jurídicos, alternativas possíveis e suas consequências.</p></li>
+            <li class="reveal"><span>c</span><h3>Estratégia</h3><p>Construir uma abordagem adequada à realidade e ao momento do cliente.</p></li>
+            <li class="reveal"><span>d</span><h3>Acompanhamento</h3><p>Participar da implementação e dos desdobramentos, quando necessário.</p></li>
+          </ol>
         </div>
-
-        <ol class="steps">
-          <li class="reveal"><span>01</span><h3>Compreensão</h3><p>Entender o negócio, as pessoas envolvidas, os bens em questão e os objetivos.</p></li>
-          <li class="reveal"><span>02</span><h3>Análise</h3><p>Identificar riscos jurídicos, alternativas possíveis e suas consequências.</p></li>
-          <li class="reveal"><span>03</span><h3>Estratégia</h3><p>Construir uma abordagem adequada à realidade e ao momento do cliente.</p></li>
-          <li class="reveal"><span>04</span><h3>Acompanhamento</h3><p>Participar da implementação e dos desdobramentos, quando necessário.</p></li>
-        </ol>
-
-        <ul class="principles reveal" aria-label="Princípios de atuação">
-          <li><strong>Proximidade</strong><span>Comunicação direta durante todo o trabalho.</span></li>
-          <li><strong>Discrição</strong><span>Confidencialidade no tratamento das informações.</span></li>
-          <li><strong>Clareza</strong><span>Questões complexas traduzidas em cenários compreensíveis.</span></li>
-        </ul>
       </div>
     </section>
 
-    <!-- Escritório -->
-    <section class="section tone-dark" id="escritorio">
-      <div class="container office">
-        <div class="office-copy reveal">
-          <p class="eyebrow">O escritório</p>
-          <h2>Valença &amp; Prado.</h2>
-          <p class="lead">Advocacia próxima, criteriosa e orientada a decisões relevantes.</p>
-          <p>O modelo de atuação privilegia relações de longo prazo. Isso significa compreender o contexto antes de oferecer uma resposta, discutir alternativas com transparência e tratar cada demanda de acordo com a sua complexidade.</p>
-
-          <div class="audience">
-            <p class="eyebrow">Para quem atuamos</p>
-            <ul>
-              <li>Empresas e grupos empresariais</li>
-              <li>Sócios e empresários</li>
-              <li>Famílias empresárias</li>
-              <li>Executivos e profissionais liberais</li>
-            </ul>
+    <!-- III. Escritório -->
+    <section class="section office" id="escritorio">
+      <figure class="office-photo photo reveal">
+        <img src="assets/escritorio-interno.webp" width="1200" height="801" alt="Ambiente interno de escritório com corredor longo e iluminação suave" loading="lazy">
+      </figure>
+      <div class="wrap doc">
+        <aside class="margin reveal"><span class="sec">III</span>Escritório</aside>
+        <div class="doc-body office-body">
+          <h2 class="reveal">Advocacia próxima, criteriosa e orientada a decisões relevantes.</h2>
+          <div class="cols reveal">
+            <p>O modelo de atuação privilegia relações de longo prazo. Isso significa compreender o contexto antes de oferecer uma resposta, discutir alternativas com transparência e tratar cada demanda de acordo com a sua complexidade.</p>
+            <div>
+              <p class="mini-label">Para quem atuamos</p>
+              <ul class="plain">
+                <li>Empresas e grupos empresariais</li>
+                <li>Sócios e empresários</li>
+                <li>Famílias empresárias</li>
+                <li>Executivos e profissionais liberais</li>
+              </ul>
+            </div>
           </div>
+          <ul class="tenets reveal" aria-label="Princípios de atuação">
+            <li><strong>Proximidade</strong>Comunicação direta durante todo o trabalho.</li>
+            <li><strong>Discrição</strong>Confidencialidade no tratamento das informações.</li>
+            <li><strong>Clareza</strong>Questões complexas traduzidas em cenários compreensíveis.</li>
+          </ul>
         </div>
-
-        <figure class="office-media reveal">
-          <img src="assets/escritorio-interno.webp" width="1200" height="801" alt="Ambiente interno de escritório com corredor longo e iluminação suave" loading="lazy">
-        </figure>
       </div>
     </section>
 
-    <!-- Sócios -->
-    <section class="section tone-ivory" id="socios">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">Sócios</p>
-          <h2>Quem está à frente do escritório.</h2>
+    <!-- IV. Sócios -->
+    <section class="section partners" id="socios">
+      <div class="wrap doc">
+        <aside class="margin reveal"><span class="sec">IV</span>Sócios</aside>
+        <div class="doc-body">
+          <h2 class="reveal">Quem está à frente do escritório.</h2>
+          <div class="partner-list">
+            <article class="partner reveal">
+              <div class="portrait" role="img" aria-label="Espaço reservado para o retrato de Eduardo Valença">
+                <span aria-hidden="true">E<i>V</i></span>
+                <small>Retrato a definir</small>
+              </div>
+              <div>
+                <p class="mini-label">Sócio</p>
+                <h3>Eduardo Valença</h3>
+                <p>Direito Empresarial, Societário e Contratos.</p>
+                <p class="oab" data-placeholder="oab">OAB/MT 00.000</p>
+              </div>
+            </article>
+            <article class="partner reveal">
+              <div class="portrait" role="img" aria-label="Espaço reservado para o retrato de Mariana Prado">
+                <span aria-hidden="true">M<i>P</i></span>
+                <small>Retrato a definir</small>
+              </div>
+              <div>
+                <p class="mini-label">Sócia</p>
+                <h3>Mariana Prado</h3>
+                <p>Planejamento Patrimonial e Sucessório e Contencioso Estratégico.</p>
+                <p class="oab" data-placeholder="oab">OAB/MT 00.000</p>
+              </div>
+            </article>
+          </div>
+          <p class="fine reveal">Profissionais e números de inscrição fictícios, usados apenas para fins de portfólio.</p>
         </div>
-
-        <div class="partners">
-          <article class="partner reveal">
-            <div class="partner-plate" role="img" aria-label="Espaço reservado para o retrato de Eduardo Valença">
-              <span aria-hidden="true">EV</span>
-              <small>Retrato a definir</small>
-            </div>
-            <div class="partner-meta">
-              <h3>Eduardo Valença</h3>
-              <p class="partner-role">Sócio</p>
-              <p>Direito Empresarial, Societário e Contratos.</p>
-              <p class="partner-oab" data-placeholder="oab">OAB/MT 00.000</p>
-            </div>
-          </article>
-
-          <article class="partner reveal">
-            <div class="partner-plate" role="img" aria-label="Espaço reservado para o retrato de Mariana Prado">
-              <span aria-hidden="true">MP</span>
-              <small>Retrato a definir</small>
-            </div>
-            <div class="partner-meta">
-              <h3>Mariana Prado</h3>
-              <p class="partner-role">Sócia</p>
-              <p>Planejamento Patrimonial e Sucessório e Contencioso Estratégico.</p>
-              <p class="partner-oab" data-placeholder="oab">OAB/MT 00.000</p>
-            </div>
-          </article>
-        </div>
-
-        <p class="fine-print reveal">Profissionais e números de inscrição fictícios, usados apenas para fins de portfólio.</p>
       </div>
     </section>
 
-    <!-- Dúvidas -->
-    <section class="section tone-stone" id="faq">
-      <div class="container faq">
-        <div class="section-head reveal">
-          <p class="eyebrow">Dúvidas frequentes</p>
-          <h2>Antes do primeiro contato.</h2>
-        </div>
-
-        <div class="faq-list reveal">
-          <details>
-            <summary>O escritório atende apenas empresas?</summary>
-            <p>Não. Além da atuação empresarial, o escritório trabalha com questões patrimoniais e sucessórias de pessoas e famílias, especialmente quando o patrimônio pessoal tem relação com uma atividade empresarial.</p>
-          </details>
-          <details>
-            <summary>É possível procurar o escritório antes de existir um problema?</summary>
-            <p>Sim. Boa parte da atuação é consultiva e preventiva: a análise jurídica acontece antes da tomada de decisão.</p>
-          </details>
-          <details>
-            <summary>O escritório elabora e revisa contratos?</summary>
-            <p>Sim. A atuação contratual inclui elaboração, revisão e análise de instrumentos ligados às áreas atendidas pelo escritório.</p>
-          </details>
-          <details>
-            <summary>Como funciona o primeiro contato?</summary>
-            <p>O primeiro contato serve para entender, de forma inicial, a natureza da demanda e verificar a possibilidade de atendimento. Quando for o caso, é agendada uma reunião para aprofundar o contexto.</p>
-          </details>
-          <details>
-            <summary>O escritório atende clientes fora de Cuiabá?</summary>
-            <p>Sim. Conforme a natureza da demanda, o atendimento pode ser presencial ou por meios digitais.</p>
-          </details>
-          <details>
-            <summary>As informações deste site substituem uma consulta?</summary>
-            <p>Não. O conteúdo tem caráter apenas informativo. Cada situação depende de fatos e documentos específicos, que precisam ser analisados por um advogado.</p>
-          </details>
+    <!-- V. Dúvidas -->
+    <section class="section faq" id="faq">
+      <div class="wrap doc">
+        <aside class="margin reveal"><span class="sec">V</span>Dúvidas</aside>
+        <div class="doc-body">
+          <h2 class="reveal">Antes do primeiro contato.</h2>
+          <div class="faq-list reveal">
+            <details>
+              <summary>O escritório atende apenas empresas?</summary>
+              <p>Não. Além da atuação empresarial, o escritório trabalha com questões patrimoniais e sucessórias de pessoas e famílias, especialmente quando o patrimônio pessoal tem relação com uma atividade empresarial.</p>
+            </details>
+            <details>
+              <summary>É possível procurar o escritório antes de existir um problema?</summary>
+              <p>Sim. Boa parte da atuação é consultiva e preventiva: a análise jurídica acontece antes da tomada de decisão.</p>
+            </details>
+            <details>
+              <summary>O escritório elabora e revisa contratos?</summary>
+              <p>Sim. A atuação contratual inclui elaboração, revisão e análise de instrumentos ligados às áreas atendidas pelo escritório.</p>
+            </details>
+            <details>
+              <summary>Como funciona o primeiro contato?</summary>
+              <p>O primeiro contato serve para entender, de forma inicial, a natureza da demanda e verificar a possibilidade de atendimento. Quando for o caso, é agendada uma reunião para aprofundar o contexto.</p>
+            </details>
+            <details>
+              <summary>O escritório atende clientes fora de Cuiabá?</summary>
+              <p>Sim. Conforme a natureza da demanda, o atendimento pode ser presencial ou por meios digitais.</p>
+            </details>
+            <details>
+              <summary>As informações deste site substituem uma consulta?</summary>
+              <p>Não. O conteúdo tem caráter apenas informativo. Cada situação depende de fatos e documentos específicos, que precisam ser analisados por um advogado.</p>
+            </details>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Contato -->
-    <section class="section tone-dark contact" id="contato">
-      <div class="container contact-grid">
+    <section class="contact" id="contato">
+      <div class="wrap contact-grid">
         <div class="contact-copy reveal">
-          <p class="eyebrow">Contato</p>
+          <p class="kicker">Contato</p>
           <h2>Apresente o contexto da sua questão.</h2>
           <p>Se a sua empresa, sociedade ou patrimônio está diante de uma decisão relevante, entre em contato. O escritório avalia a demanda e informa se e como pode atender.</p>
+          <a class="btn btn-light" href="#pre-atendimento">Iniciar pré-atendimento</a>
         </div>
-
-        <div class="contact-card reveal">
-          <dl>
-            <div><dt>Endereço</dt><dd data-placeholder="endereco">Praça da República, s/n · Centro Norte<br>Cuiabá, MT</dd></div>
-            <div><dt>Telefone</dt><dd data-placeholder="telefone">(65) 0000-0000</dd></div>
-            <div><dt>E-mail</dt><dd data-placeholder="email">contato@valencaeprado.com.br</dd></div>
-            <div><dt>Atendimento</dt><dd>Com hora marcada</dd></div>
-          </dl>
-          <button type="button" class="btn btn-bronze btn-block" data-wa-open>Conversar pelo WhatsApp</button>
-          <p class="fine-print">Endereço, telefone e e-mail fictícios deste projeto conceitual.</p>
-        </div>
+        <dl class="contact-list reveal">
+          <div><dt>Endereço</dt><dd data-placeholder="endereco">Praça da República, s/n<br>Centro Norte · Cuiabá, MT</dd></div>
+          <div><dt>Telefone</dt><dd data-placeholder="telefone">(65) 0000-0000</dd></div>
+          <div><dt>E-mail</dt><dd data-placeholder="email">contato@valencaeprado.com.br</dd></div>
+          <div><dt>Atendimento</dt><dd>Com hora marcada</dd></div>
+          <p class="fine">Endereço, telefone e e-mail fictícios deste projeto conceitual.</p>
+        </dl>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="brand">
-        <span class="brand-mark" aria-hidden="true">V<i>&amp;</i>P</span>
-        <span class="brand-copy"><strong>Valença &amp; Prado</strong><small>Advocacia</small></span>
-      </div>
-      <nav class="footer-links" aria-label="Rodapé">
+    <div class="wrap footer-grid">
+      <p class="wordmark">Valença <i>&amp;</i> Prado <small>Advocacia</small></p>
+      <nav aria-label="Rodapé">
         <a href="#atuacao">Atuação</a>
-        <a href="#metodo">Como trabalhamos</a>
+        <a href="#pre-atendimento">Pré-atendimento</a>
         <a href="#socios">Sócios</a>
         <a href="#contato">Contato</a>
       </nav>
-      <div class="footer-legal">
+      <div class="legal">
         <p data-placeholder="registro-sociedade">Valença &amp; Prado Sociedade de Advogados · Registro OAB/MT nº 0.000</p>
         <p>O conteúdo deste site tem caráter informativo e não substitui a análise de um advogado sobre o caso concreto.</p>
         <p>Projeto fictício desenvolvido para fins de portfólio.</p>
@@ -383,17 +360,17 @@
     </div>
   </footer>
 
-  <a class="contact-float" href="#contato" aria-label="Ir para o contato">Contato</a>
+  <a class="float-cta" href="#pre-atendimento">Pré-atendimento</a>
 
-  <dialog class="wa-dialog" data-wa-dialog aria-labelledby="wa-title">
-    <form method="dialog" class="wa-inner">
-      <button class="wa-close" value="close" aria-label="Fechar">×</button>
-      <p class="eyebrow">Mensagem preparada</p>
-      <h2 id="wa-title">O primeiro contato já chega com contexto.</h2>
-      <blockquote class="wa-preview" data-wa-message>Olá. Conheci a Valença &amp; Prado pelo site. Minha questão está relacionada a empresa. Meu objetivo é prevenir problemas antes de tomar uma decisão.</blockquote>
-      <p class="fine-print" data-wa-note>Demonstração: neste projeto conceitual nenhuma mensagem é enviada. Em um site real, o botão abaixo abre o WhatsApp do escritório com este texto.</p>
-      <div class="wa-actions">
-        <button type="button" class="btn btn-bronze" data-wa-send>Copiar mensagem</button>
+  <dialog class="sent-dialog" data-dialog aria-labelledby="dlg-title">
+    <form method="dialog">
+      <button class="dlg-close" value="close" aria-label="Fechar">×</button>
+      <p class="mini-label">Demonstração</p>
+      <h2 id="dlg-title">A mensagem chegaria assim ao escritório.</h2>
+      <blockquote data-out="message"></blockquote>
+      <p class="fine">Neste projeto conceitual nenhuma mensagem é enviada. Em um site real, o WhatsApp ou o e-mail do escritório abre com este texto, que ainda pode ser editado antes do envio.</p>
+      <div class="dlg-actions">
+        <button type="button" class="btn btn-solid" data-copy>Copiar mensagem</button>
         <button class="btn btn-line" value="close">Fechar</button>
       </div>
     </form>
