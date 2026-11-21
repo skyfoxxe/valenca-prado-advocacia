@@ -154,7 +154,9 @@ if (sendBtn) {
       return;
     }
     setOut('message', message);
-    if (dialog && typeof dialog.showModal === 'function') dialog.showModal();
+    if (!dialog) return;
+    if (typeof dialog.showModal === 'function') dialog.showModal();
+    else dialog.setAttribute('open', '');
   });
 }
 if (dialog) dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
