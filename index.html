@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Projeto conceitual de portfólio: site de um escritório fictício de advocacia societária, contratual, patrimonial e sucessória em Cuiabá, MT." />
   <meta name="robots" content="index,follow,max-image-preview:large" />
-  <meta name="theme-color" content="#F7F2EA" />
+  <meta name="theme-color" content="#14251E" />
   <link rel="canonical" href="https://valencapradoadvocacia.vercel.app/" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="pt_BR" />
@@ -26,6 +26,7 @@
   }
   </script>
 
+  <link rel="preconnect" href="https://images.unsplash.com">
   <link rel="preload" href="assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css" />
@@ -54,32 +55,51 @@
 
   <main id="conteudo">
 
-    <!-- Abertura (composição da versão anterior) -->
-    <section class="hero" id="inicio">
-      <div class="frame hero-grid">
-        <div class="hero-main">
-          <p class="label hero-kicker" data-hero="1">Advocacia empresarial e patrimonial <span>Cuiabá · MT</span></p>
-          <h1 class="hero-title"><span class="line"><span class="line-in">Antes da decisão,</span></span> <span class="line"><em class="line-in">o contexto.</em></span></h1>
-          <p class="hero-sub" data-hero="3">Assessoria jurídica para empresas, sócios e famílias em decisões que envolvem negócios, patrimônio e continuidade.</p>
-          <div class="hero-actions" data-hero="4">
-            <a class="btn" href="#conversa">Agendar uma conversa</a>
-            <a class="quiet-link" href="#atuacao">Áreas de atuação</a>
-          </div>
+    <!-- Abertura: sala escura, título largo e o índice das cinco fases -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-statue" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1768839722927-df0ef3188f6d?auto=format&amp;fit=crop&amp;w=1600&amp;q=70" srcset="https://images.unsplash.com/photo-1768839722927-df0ef3188f6d?auto=format&amp;fit=crop&amp;w=900&amp;q=70 900w, https://images.unsplash.com/photo-1768839722927-df0ef3188f6d?auto=format&amp;fit=crop&amp;w=1600&amp;q=70 1600w, https://images.unsplash.com/photo-1768839722927-df0ef3188f6d?auto=format&amp;fit=crop&amp;w=2200&amp;q=65 2200w" sizes="100vw" width="1600" height="1067" alt="" fetchpriority="high">
+      </div>
+      <div class="frame hero-inner">
+        <div class="hero-meta">
+          <p class="label">Advocacia empresarial e patrimonial</p>
+          <p class="label">Cuiabá · Mato Grosso</p>
         </div>
 
-        <figure class="hero-photo" data-hero-photo>
-          <div class="window-pane">
-            <picture>
-              <source media="(max-width: 760px)" srcset="assets/escritorio-corredor-800.webp 800w, assets/escritorio-corredor.webp 1400w" sizes="100vw" width="800" height="534">
-              <img src="assets/escritorio-corredor-retrato.webp" srcset="assets/escritorio-corredor-retrato-480.webp 480w, assets/escritorio-corredor-retrato.webp 701w" sizes="(max-width: 1024px) 40vw, 400px" width="701" height="935" alt="" fetchpriority="high">
-            </picture>
-          </div>
-          <figcaption class="label">Imagem ilustrativa</figcaption>
-        </figure>
-      </div>
+        <h1 class="hero-title" id="hero-title"><span class="line"><span class="line-in">Antes da decisão,</span></span> <span class="line line-2"><em class="line-in">o contexto.</em></span></h1>
 
-      <p class="frame concept">Projeto conceitual de portfólio. O escritório, as pessoas, os números de OAB, o endereço e os contatos são fictícios.</p>
+        <div class="hero-foot">
+          <div class="hero-lead">
+            <p class="hero-sub">Assessoria jurídica para empresas, sócios e famílias em decisões que envolvem negócios, patrimônio e continuidade.</p>
+            <div class="hero-actions">
+              <a class="btn btn-light" href="#conversa">Agendar uma conversa</a>
+            </div>
+          </div>
+
+          <nav class="hero-index" aria-label="Encontre a sua fase">
+            <p class="label hero-index-label" data-hero-index>Em que fase você está?</p>
+            <ol>
+              <li data-hero-index><a href="#fase-fundar"><span class="hi-num">I</span><span class="hi-name">Fundar</span><span class="hi-cue">Abrir a empresa</span></a></li>
+              <li data-hero-index><a href="#fase-crescer"><span class="hi-num">II</span><span class="hi-name">Crescer</span><span class="hi-cue">Contratos e investidores</span></a></li>
+              <li data-hero-index><a href="#fase-organizar"><span class="hi-num">III</span><span class="hi-name">Organizar</span><span class="hi-cue">Família e patrimônio</span></a></li>
+              <li data-hero-index><a href="#fase-suceder"><span class="hi-num">IV</span><span class="hi-name">Suceder</span><span class="hi-cue">A próxima geração</span></a></li>
+              <li data-hero-index><a href="#fase-resolver"><span class="hi-num">V</span><span class="hi-name">Resolver</span><span class="hi-cue">Quando há desacordo</span></a></li>
+            </ol>
+          </nav>
+        </div>
+      </div>
     </section>
+
+    <!-- Passagem: a foto ocupa a largura toda e se abre com a rolagem -->
+    <figure class="passage">
+      <div class="passage-pane">
+        <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&amp;fit=crop&amp;w=1600&amp;q=70" srcset="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&amp;fit=crop&amp;w=800&amp;h=1000&amp;q=70 800w, https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&amp;fit=crop&amp;w=1600&amp;q=70 1600w, https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&amp;fit=crop&amp;w=2400&amp;q=65 2400w" sizes="100vw" width="1600" height="1067" alt="Biblioteca jurídica com estantes de livros antigos e bustos de mármore" loading="lazy" decoding="async">
+      </div>
+      <figcaption class="frame passage-cap">
+        <span class="label">Imagens ilustrativas · Unsplash</span>
+        <span class="concept">Projeto conceitual de portfólio. O escritório, as pessoas, os números de OAB, o endereço e os contatos são fictícios.</span>
+      </figcaption>
+    </figure>
 
     <!-- Fases -->
     <section class="section phases" id="atuacao" aria-labelledby="atuacao-title">
@@ -162,9 +182,12 @@
 
     <!-- Princípio -->
     <section class="principle" aria-label="Princípio do escritório">
-      <figure class="frame principle-inner" data-reveal>
-        <blockquote data-dissolve>Uma boa decisão jurídica raramente é a mais rápida. É a que continua fazendo sentido <em>dez anos depois.</em></blockquote>
-        <figcaption class="label">Princípio do escritório</figcaption>
+      <figure class="frame principle-inner">
+        <div class="principle-photo" data-reveal>
+          <img src="https://images.unsplash.com/photo-1589578527966-fdac0f44566c?auto=format&amp;fit=crop&amp;w=800&amp;q=70" srcset="https://images.unsplash.com/photo-1589578527966-fdac0f44566c?auto=format&amp;fit=crop&amp;w=500&amp;q=70 500w, https://images.unsplash.com/photo-1589578527966-fdac0f44566c?auto=format&amp;fit=crop&amp;w=800&amp;q=70 800w, https://images.unsplash.com/photo-1589578527966-fdac0f44566c?auto=format&amp;fit=crop&amp;w=1100&amp;q=65 1100w" sizes="(max-width: 760px) 70vw, 30vw" width="800" height="1200" alt="Estátua de bronze da Justiça segurando a balança e a espada" loading="lazy" decoding="async">
+        </div>
+        <blockquote data-reveal>Uma boa decisão jurídica raramente é a mais rápida. É a que continua fazendo sentido <em>dez anos depois.</em></blockquote>
+        <figcaption class="label" data-reveal>Princípio do escritório</figcaption>
       </figure>
     </section>
 
@@ -255,20 +278,20 @@
         </header>
         <div class="partner-grid">
           <article class="partner" data-reveal>
-            <div class="monogram" role="img" aria-label="Espaço reservado para o retrato de Eduardo Valença">
-              <span aria-hidden="true">E<i>V</i></span>
-              <small>Retrato a definir</small>
-            </div>
+            <figure class="portrait">
+              <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&amp;fit=crop&amp;crop=faces&amp;w=840&amp;h=1050&amp;q=70" srcset="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&amp;fit=crop&amp;crop=faces&amp;w=480&amp;h=600&amp;q=70 480w, https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&amp;fit=crop&amp;crop=faces&amp;w=840&amp;h=1050&amp;q=70 840w" sizes="(max-width: 760px) 92vw, 420px" width="840" height="1050" alt="Retrato ilustrativo de um advogado de terno escuro" loading="lazy" decoding="async">
+              <figcaption>Imagem ilustrativa</figcaption>
+            </figure>
             <h3>Eduardo Valença</h3>
             <p class="partner-role">Sócio · Fases I e II</p>
             <p>Conduz a prática societária e contratual: fundação, crescimento e reorganização de empresas.</p>
             <p class="oab" data-placeholder="oab">OAB/MT 00.000</p>
           </article>
           <article class="partner" data-reveal>
-            <div class="monogram" role="img" aria-label="Espaço reservado para o retrato de Mariana Prado">
-              <span aria-hidden="true">M<i>P</i></span>
-              <small>Retrato a definir</small>
-            </div>
+            <figure class="portrait">
+              <img src="https://images.unsplash.com/photo-1665224752136-4dbe2dfc8195?auto=format&amp;fit=crop&amp;crop=faces&amp;w=840&amp;h=1050&amp;q=70" srcset="https://images.unsplash.com/photo-1665224752136-4dbe2dfc8195?auto=format&amp;fit=crop&amp;crop=faces&amp;w=480&amp;h=600&amp;q=70 480w, https://images.unsplash.com/photo-1665224752136-4dbe2dfc8195?auto=format&amp;fit=crop&amp;crop=faces&amp;w=840&amp;h=1050&amp;q=70 840w" sizes="(max-width: 760px) 92vw, 420px" width="840" height="1050" alt="Retrato ilustrativo de uma advogada de blazer escuro" loading="lazy" decoding="async">
+              <figcaption>Imagem ilustrativa</figcaption>
+            </figure>
             <h3>Mariana Prado</h3>
             <p class="partner-role">Sócia · Fases III, IV e V</p>
             <p>Conduz a prática patrimonial, sucessória e contenciosa: organização de bens, sucessão e conflitos.</p>
