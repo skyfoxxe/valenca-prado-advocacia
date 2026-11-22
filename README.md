@@ -10,7 +10,7 @@ Advocacia organizada pelas fases de uma empresa e de uma família: **I Fundar, I
 Gênero `quiet-luxury` do pacote design-taste, com a paleta fixa da skill: marfim `#F7F2EA`, painel `#EFE8DC`, tinta `#17130F` e um único acento latão `#9A7B4F`. Tipografia: Instrument Serif nos títulos e Instrument Sans no texto.
 
 ## Estrutura da página
-1. Abertura: título, chamada e índice das cinco fases
+1. Abertura: composição da versão anterior ("Antes da decisão, o contexto."), com texto à esquerda e foto vertical à direita
 2. Atuação (`#atuacao`): as cinco fases, com um mostrador fixo que acompanha a leitura
 3. Princípio do escritório
 4. Agendar uma conversa (`#conversa`): fase, prazo e forma de retorno + nome opcional montam a mensagem
@@ -21,7 +21,7 @@ Gênero `quiet-luxury` do pacote design-taste, com a paleta fixa da skill: marfi
 
 ## Movimento (faixa Estratégico)
 Feito com as skills `animate` e `review-animations`, nos tokens de `taste-motion`:
-- abertura em sequência: cada palavra do título sobe de trás da própria máscara, o índice entra em cascata e a foto abre como uma persiana;
+- abertura em sequência: cada palavra do título sobe de trás da própria máscara e a foto abre de baixo para cima, como uma janela;
 - blocos entram uma vez, 14px e 600ms, escalonados em 80ms quando entram juntos;
 - linhas finas se desenham como traço de caneta;
 - mostrador das fases troca o numeral com um leve desfoque e preenche a linha conforme a leitura;

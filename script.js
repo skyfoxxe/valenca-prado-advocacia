@@ -67,9 +67,6 @@ if (title) {
   splitInto(title, frag);
   title.replaceChildren(frag);
 }
-document.querySelectorAll('.hero-index li[data-hero]').forEach((li, i) => {
-  li.style.transitionDelay = `${420 + i * 70}ms`;
-});
 if (hero) {
   // Espera as fontes (até 700ms) para que a máscara não corte a palavra errada.
   const start = () => requestAnimationFrame(() => hero.classList.add('is-in'));
