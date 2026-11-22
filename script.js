@@ -64,32 +64,6 @@ function setPhase(el) {
   swapTimer = setTimeout(() => { apply(); dial.classList.remove('is-swapping'); }, 140);
 }
 
-// Palavras do princípio, para o "dissolve" no pin (só desktop, só com movimento).
-const quote = document.querySelector('[data-dissolve]');
-let quoteWords = [];
-if (quote) {
-  const wrapWords = node => {
-    [...node.childNodes].forEach(child => {
-      if (child.nodeType === Node.TEXT_NODE) {
-        const frag = document.createDocumentFragment();
-        child.textContent.split(/(\s+)/).forEach(part => {
-          if (!part) return;
-          if (/^\s+$/.test(part)) { frag.append(document.createTextNode(part)); return; }
-          const w = document.createElement('span');
-          w.className = 'qw';
-          w.textContent = part;
-          quoteWords.push(w);
-          frag.append(w);
-        });
-        child.replaceWith(frag);
-      } else {
-        wrapWords(child);
-      }
-    });
-  };
-  wrapWords(quote);
-}
-
 function startMotion() {
   const { gsap, ScrollTrigger } = window;
   if (!gsap || !ScrollTrigger) {
@@ -206,17 +180,6 @@ function startMotion() {
           }
         });
       });
-
-      // --- Desktop: o princípio fica fixo e as palavras assentam (único pin da página) ---
-      if (quote && quoteWords.length) {
-        gsap.fromTo(quoteWords, { opacity: .14 }, {
-          opacity: 1, ease: 'none', stagger: .12,
-          scrollTrigger: {
-            trigger: '.principle', start: 'center center', end: '+=140%',
-            pin: true, pinSpacing: true, scrub: .6, invalidateOnRefresh: true
-          }
-        });
-      }
 
       return () => document.querySelectorAll('.has-drift').forEach(p => p.classList.remove('has-drift'));
     });
