@@ -3,375 +3,364 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Projeto conceitual de portfólio: site para um escritório fictício de advocacia empresarial e patrimonial em Cuiabá, MT, com pré-atendimento por tema e momento." />
+  <meta name="description" content="Projeto conceitual de portfólio: site de um escritório fictício de advocacia societária, contratual, patrimonial e sucessória em Cuiabá, MT." />
   <meta name="robots" content="index,follow,max-image-preview:large" />
-  <meta name="theme-color" content="#1f2e27" />
+  <meta name="theme-color" content="#F7F2EA" />
   <link rel="canonical" href="https://valencapradoadvocacia.vercel.app/" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="pt_BR" />
-  <meta property="og:title" content="Valença & Prado | Projeto conceitual de advocacia empresarial em Cuiabá" />
-  <meta property="og:description" content="Projeto conceitual: experiência digital para um escritório fictício de advocacia empresarial e patrimonial em Cuiabá, MT." />
+  <meta property="og:title" content="Valença & Prado | Projeto conceitual de advocacia em Cuiabá" />
+  <meta property="og:description" content="Projeto conceitual: advocacia para empresas e famílias, organizada pelas fases de um negócio." />
   <meta property="og:url" content="https://valencapradoadvocacia.vercel.app/" />
   <meta property="og:image" content="https://valencapradoadvocacia.vercel.app/assets/escritorio-corredor.webp" />
-  <title>Valença & Prado | Projeto conceitual de Advocacia Empresarial em Cuiabá</title>
+  <title>Valença & Prado | Projeto conceitual de advocacia em Cuiabá</title>
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
-    "name": "Valença & Prado — projeto conceitual de advocacia empresarial em Cuiabá",
-    "description": "Projeto conceitual de portfólio que demonstra um site responsivo para advocacia, com pré-atendimento estruturado e preparado para SEO local.",
+    "name": "Valença & Prado — projeto conceitual de site de advocacia em Cuiabá",
+    "description": "Projeto conceitual de portfólio: site institucional responsivo para advocacia, com pré-atendimento estruturado e SEO local.",
     "creator": {"@type": "Person", "name": "Matheus Moreira"},
-    "spatialCoverage": {"@type": "Place", "name": "Cuiabá, Mato Grosso, Brasil"},
-    "about": [
-      {"@type": "Thing", "name": "Advocacia empresarial em Cuiabá"},
-      {"@type": "Thing", "name": "Design de site institucional"},
-      {"@type": "Thing", "name": "SEO local"}
-    ]
+    "spatialCoverage": {"@type": "Place", "name": "Cuiabá, Mato Grosso, Brasil"}
   }
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital@0;1&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
-  <header class="site-header" id="topo">
-    <div class="wrap nav">
-      <a class="wordmark" href="#topo" aria-label="Valença & Prado, início">
-        Valença <i>&amp;</i> Prado
-        <small>Advocacia</small>
-      </a>
-
-      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
-        <span>Menu</span>
-      </button>
-
-      <nav class="menu" id="menu" aria-label="Navegação principal">
+  <header class="top" data-top>
+    <div class="frame top-row">
+      <a class="mark" href="#inicio" aria-label="Valença & Prado, início">Valença <i>&amp;</i> Prado</a>
+      <nav class="nav" id="nav" aria-label="Principal">
         <a href="#atuacao">Atuação</a>
-        <a href="#pre-atendimento">Pré-atendimento</a>
-        <a href="#escritorio">Escritório</a>
+        <a href="#compromissos">Compromissos</a>
         <a href="#socios">Sócios</a>
-        <a href="#faq">Dúvidas</a>
-        <a class="menu-cta" href="#contato">Contato</a>
+        <a href="#escritorio">Escritório</a>
+        <a class="nav-cta" href="#conversa">Agendar uma conversa</a>
       </nav>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
     </div>
   </header>
 
   <main id="conteudo">
 
     <!-- Abertura -->
-    <section class="hero">
-      <div class="wrap hero-grid">
-        <div class="hero-copy">
-          <p class="kicker reveal">Advocacia empresarial e patrimonial <span>Cuiabá · MT</span></p>
-          <h1 class="reveal hero-title"><span class="line"><span class="line-in">Antes da decisão,</span></span> <span class="line"><em class="line-in">o contexto.</em></span></h1>
-          <p class="hero-lead reveal">Assessoria jurídica para empresas, sócios e famílias em decisões que envolvem negócios, patrimônio e continuidade.</p>
-          <div class="hero-actions reveal">
-            <a class="btn btn-solid" href="#pre-atendimento">Iniciar pré-atendimento</a>
-            <a class="link-quiet" href="#atuacao">Áreas de atuação</a>
+    <section class="hero" id="inicio">
+      <div class="frame hero-grid">
+        <div class="hero-main">
+          <p class="label hero-kicker" data-hero="1">Advocacia · Cuiabá, Mato Grosso</p>
+          <h1 class="hero-title" data-split>Advocacia para empresas e famílias que pensam em <em>décadas.</em></h1>
+          <p class="hero-sub" data-hero="3">Societário, contratos, patrimônio e sucessão, com atendimento presencial em Cuiabá ou por videochamada.</p>
+          <div class="hero-actions" data-hero="4">
+            <a class="btn" href="#conversa">Agendar uma conversa</a>
+            <a class="quiet-link" href="#atuacao">Ver as fases de atuação</a>
           </div>
         </div>
 
-        <figure class="hero-photo photo reveal">
-          <img src="assets/escritorio-corredor.webp" width="1400" height="935" alt="Corredor de escritório com divisórias de vidro" fetchpriority="high">
-          <figcaption>Valença &amp; Prado · Cuiabá</figcaption>
-        </figure>
+        <nav class="hero-index" aria-label="Fases de atuação">
+          <p class="label" data-hero="2">Índice</p>
+          <ol>
+            <li data-hero="2"><a href="#fase-fundar"><span aria-hidden="true">I</span>Fundar</a></li>
+            <li data-hero="2"><a href="#fase-crescer"><span aria-hidden="true">II</span>Crescer</a></li>
+            <li data-hero="2"><a href="#fase-organizar"><span aria-hidden="true">III</span>Organizar</a></li>
+            <li data-hero="2"><a href="#fase-suceder"><span aria-hidden="true">IV</span>Suceder</a></li>
+            <li data-hero="2"><a href="#fase-resolver"><span aria-hidden="true">V</span>Resolver</a></li>
+          </ol>
+        </nav>
       </div>
 
-      <div class="wrap concept reveal" role="note">
-        <p><strong>Projeto conceitual de portfólio.</strong> O escritório, os profissionais, os números de OAB, os contatos e o endereço são fictícios.</p>
-      </div>
-    </section>
-
-    <!-- Princípio -->
-    <section class="section principle">
-      <div class="wrap doc">
-        <aside class="margin reveal"><span class="sec">§</span>Princípio</aside>
-        <div class="doc-body">
-          <p class="statement reveal">Muitas das decisões jurídicas mais importantes acontecem antes de qualquer conflito: na estruturação de uma sociedade, na assinatura de um contrato, na reorganização de um patrimônio ou na preparação de uma sucessão.</p>
-          <div class="cols reveal">
-            <p>São momentos em que uma análise cuidadosa permite enxergar riscos e alternativas com mais clareza. Por isso, o trabalho do escritório começa pela compreensão do contexto.</p>
-            <p>Como o negócio funciona, quais pessoas e bens estão envolvidos e que efeitos cada escolha pode produzir com o tempo. Só depois vem a resposta.</p>
-          </div>
+      <figure class="frame window hero-window" data-window>
+        <div class="window-pane">
+          <img src="assets/escritorio-corredor.webp" width="1400" height="935" alt="" fetchpriority="high">
         </div>
-      </div>
+        <figcaption class="label">Imagem ilustrativa</figcaption>
+      </figure>
+
+      <p class="frame concept">Projeto conceitual de portfólio. O escritório, as pessoas, os números de OAB, o endereço e os contatos são fictícios.</p>
     </section>
 
-    <!-- I. Atuação -->
-    <section class="section areas" id="atuacao">
-      <div class="wrap doc">
-        <aside class="margin reveal"><span class="sec">I</span>Atuação</aside>
-        <div class="doc-body">
-          <h2 class="reveal reveal-mask">Quatro áreas, uma mesma forma de olhar.</h2>
+    <!-- Fases -->
+    <section class="section phases" id="atuacao" aria-labelledby="atuacao-title">
+      <div class="frame">
+        <header class="section-head" data-reveal>
+          <p class="label">Atuação</p>
+          <h2 id="atuacao-title">Cada fase de uma empresa pede um cuidado jurídico diferente.</h2>
+          <p class="section-lede">A atuação do escritório está organizada pelos momentos em que ela costuma ser necessária. Encontre o seu.</p>
+        </header>
 
-          <div class="area-list rule-draw">
-            <article class="area reveal" id="area-empresarial">
-              <p class="area-num">1.1</p>
-              <h3>Direito Empresarial</h3>
-              <p>Assessoria a empresas e empresários em decisões que afetam a operação, a estrutura e a continuidade do negócio.</p>
-              <p class="area-topics">Estrutura da empresa · Responsabilidade de administradores · Reorganizações</p>
-            </article>
-            <article class="area reveal" id="area-societario">
-              <p class="area-num">1.2</p>
-              <h3>Societário e Contratos</h3>
-              <p>Estruturação e revisão de relações societárias e contratuais, com atenção aos interesses envolvidos e aos efeitos futuros.</p>
-              <p class="area-topics">Contrato social · Acordo de sócios · Entrada e saída de sócios · Contratos empresariais</p>
-            </article>
-            <article class="area reveal" id="area-patrimonial">
-              <p class="area-num">1.3</p>
-              <h3>Patrimonial e Sucessório</h3>
-              <p>Organização jurídica do patrimônio e preparação da sucessão, de forma estruturada e individualizada.</p>
-              <p class="area-topics">Organização patrimonial · Holding familiar · Testamento e doação · Inventário</p>
-            </article>
-            <article class="area reveal" id="area-contencioso">
-              <p class="area-num">1.4</p>
-              <h3>Contencioso Estratégico</h3>
-              <p>Atuação em disputas empresariais e patrimoniais que exigem análise de risco, estratégia processual e acompanhamento próximo.</p>
-              <p class="area-topics">Disputas societárias · Disputas contratuais · Conflitos patrimoniais · Vias consensuais</p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
+        <div class="phases-grid">
+          <aside class="phase-dial" aria-hidden="true">
+            <div class="dial-inner">
+              <span class="dial-num" data-dial-num>I</span>
+              <span class="dial-name" data-dial-name>Fundar</span>
+              <span class="dial-track"><span class="dial-fill" data-dial-fill></span></span>
+            </div>
+          </aside>
 
-    <!-- II. Pré-atendimento -->
-    <section class="section intake" id="pre-atendimento">
-      <div class="wrap doc">
-        <aside class="margin reveal"><span class="sec">II</span>Pré-atendimento</aside>
-        <div class="doc-body">
-          <div class="intake-head reveal">
-            <h2 class="reveal-mask">Organize a sua questão antes do primeiro contato.</h2>
-            <p>Três escolhas rápidas preparam uma mensagem objetiva para o escritório. Nada é enviado sem a sua confirmação.</p>
-          </div>
-
-          <div class="intake-grid">
-            <form class="intake-form reveal" data-intake novalidate>
-              <fieldset>
-                <legend><span>01</span>Qual assunto mais se aproxima da sua questão?</legend>
-                <div class="options">
-                  <label><input type="radio" name="tema" value="empresa" checked><span>Empresa</span></label>
-                  <label><input type="radio" name="tema" value="contratos"><span>Contratos</span></label>
-                  <label><input type="radio" name="tema" value="patrimonio"><span>Patrimônio</span></label>
-                  <label><input type="radio" name="tema" value="conflitos"><span>Conflitos</span></label>
-                </div>
-              </fieldset>
-
-              <fieldset>
-                <legend><span>02</span>Em que ponto ela está?</legend>
-                <div class="options">
-                  <label><input type="radio" name="momento" value="prevenir" checked><span>Quero prevenir</span></label>
-                  <label><input type="radio" name="momento" value="decidir"><span>Preciso decidir</span></label>
-                  <label><input type="radio" name="momento" value="reorganizar"><span>Quero reorganizar</span></label>
-                  <label><input type="radio" name="momento" value="resolver"><span>Já existe conflito</span></label>
-                </div>
-              </fieldset>
-
-              <fieldset>
-                <legend><span>03</span>Como prefere o retorno?</legend>
-                <div class="options">
-                  <label><input type="radio" name="retorno" value="whatsapp" checked><span>WhatsApp</span></label>
-                  <label><input type="radio" name="retorno" value="telefone"><span>Ligação</span></label>
-                  <label><input type="radio" name="retorno" value="email"><span>E-mail</span></label>
-                </div>
-                <label class="field">
-                  <span>Seu nome <small>(opcional)</small></span>
-                  <input type="text" name="nome" autocomplete="name" maxlength="60" placeholder="Como devemos chamar você">
-                </label>
-              </fieldset>
-            </form>
-
-            <aside class="brief reveal" aria-live="polite">
-              <p class="brief-label">Resumo para o escritório</p>
-              <p class="brief-code" data-out="code">Empresa · Prevenção</p>
-              <h3 data-out="title">Estruturar antes de assumir novos riscos.</h3>
-              <p class="brief-text" data-out="text">Questões empresariais podem envolver estrutura, responsabilidades, relações entre sócios e decisões que afetam a operação e a continuidade do negócio.</p>
-              <dl>
-                <div><dt>Área relacionada</dt><dd data-out="practice">Direito Empresarial</dd></div>
-                <div><dt>Primeira conversa</dt><dd data-out="first">Contexto, riscos e objetivos</dd></div>
-              </dl>
-              <blockquote class="brief-message" data-out="message">Olá. Conheci a Valença &amp; Prado pelo site. Minha questão está relacionada a empresa. Meu objetivo é prevenir problemas antes de tomar uma decisão. Prefiro retorno pelo WhatsApp.</blockquote>
-              <button type="button" class="btn btn-solid btn-block" data-send>Enviar pelo WhatsApp</button>
-              <p class="fine">Não inclua documentos, valores ou detalhes sigilosos nesta mensagem. O resumo serve apenas para orientar o primeiro contato e não constitui diagnóstico nem orientação jurídica.</p>
-            </aside>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Método -->
-    <section class="section method">
-      <div class="wrap doc">
-        <aside class="margin reveal"><span class="sec">§</span>Método</aside>
-        <div class="doc-body">
-          <h2 class="reveal reveal-mask">Da questão jurídica à decisão.</h2>
-          <ol class="steps rule-draw">
-            <li class="reveal"><span>a</span><h3>Compreensão</h3><p>Entender o negócio, as pessoas envolvidas, os bens em questão e os objetivos.</p></li>
-            <li class="reveal"><span>b</span><h3>Análise</h3><p>Identificar riscos jurídicos, alternativas possíveis e suas consequências.</p></li>
-            <li class="reveal"><span>c</span><h3>Estratégia</h3><p>Construir uma abordagem adequada à realidade e ao momento do cliente.</p></li>
-            <li class="reveal"><span>d</span><h3>Acompanhamento</h3><p>Participar da implementação e dos desdobramentos, quando necessário.</p></li>
+          <ol class="phase-list">
+            <li class="phase" id="fase-fundar" data-phase="I" data-name="Fundar" data-reveal>
+              <p class="phase-num">I</p>
+              <h3>Fundar</h3>
+              <p class="phase-lede">Abrir uma empresa, escolher sócios e definir quem decide o quê.</p>
+              <ul class="phase-items">
+                <li>Escolha do tipo societário</li>
+                <li>Contrato social</li>
+                <li>Acordo de sócios</li>
+              </ul>
+              <p class="phase-area">Direito Societário</p>
+            </li>
+            <li class="phase" id="fase-crescer" data-phase="II" data-name="Crescer" data-reveal>
+              <p class="phase-num">II</p>
+              <h3>Crescer</h3>
+              <p class="phase-lede">Assinar contratos maiores, receber um investidor ou abrir uma nova unidade.</p>
+              <ul class="phase-items">
+                <li>Contratos empresariais</li>
+                <li>Entrada de sócios e investidores</li>
+                <li>Reorganização societária</li>
+              </ul>
+              <p class="phase-area">Contratos e Societário</p>
+            </li>
+            <li class="phase" id="fase-organizar" data-phase="III" data-name="Organizar" data-reveal>
+              <p class="phase-num">III</p>
+              <h3>Organizar</h3>
+              <p class="phase-lede">Separar o que é da família do que é da empresa, antes que os dois se confundam.</p>
+              <ul class="phase-items">
+                <li>Planejamento patrimonial</li>
+                <li>Holding familiar</li>
+                <li>Regras de convivência entre família e empresa</li>
+              </ul>
+              <p class="phase-area">Direito Patrimonial</p>
+            </li>
+            <li class="phase" id="fase-suceder" data-phase="IV" data-name="Suceder" data-reveal>
+              <p class="phase-num">IV</p>
+              <h3>Suceder</h3>
+              <p class="phase-lede">Preparar a passagem do negócio e dos bens para a próxima geração.</p>
+              <ul class="phase-items">
+                <li>Planejamento sucessório</li>
+                <li>Testamento e doação</li>
+                <li>Inventário judicial e extrajudicial</li>
+              </ul>
+              <p class="phase-area">Sucessões</p>
+            </li>
+            <li class="phase" id="fase-resolver" data-phase="V" data-name="Resolver" data-reveal>
+              <p class="phase-num">V</p>
+              <h3>Resolver</h3>
+              <p class="phase-lede">Quando já existe um desacordo entre sócios, parceiros ou herdeiros.</p>
+              <ul class="phase-items">
+                <li>Negociação e mediação</li>
+                <li>Disputas societárias e contratuais</li>
+                <li>Processos judiciais</li>
+              </ul>
+              <p class="phase-area">Contencioso</p>
+            </li>
           </ol>
         </div>
       </div>
     </section>
 
-    <!-- III. Escritório -->
-    <section class="section office" id="escritorio">
-      <figure class="office-photo photo reveal">
-        <img src="assets/escritorio-interno.webp" width="1200" height="801" alt="Ambiente interno de escritório com corredor longo e iluminação suave" loading="lazy">
+    <!-- Princípio -->
+    <section class="principle" aria-label="Princípio do escritório">
+      <figure class="frame principle-inner" data-reveal>
+        <blockquote>Uma boa decisão jurídica raramente é a mais rápida. É a que continua fazendo sentido <em>dez anos depois.</em></blockquote>
+        <figcaption class="label">Princípio do escritório</figcaption>
       </figure>
-      <div class="wrap doc">
-        <aside class="margin reveal"><span class="sec">III</span>Escritório</aside>
-        <div class="doc-body office-body">
-          <h2 class="reveal reveal-mask">Advocacia próxima, criteriosa e orientada a decisões relevantes.</h2>
-          <div class="cols reveal">
-            <p>O modelo de atuação privilegia relações de longo prazo. Isso significa compreender o contexto antes de oferecer uma resposta, discutir alternativas com transparência e tratar cada demanda de acordo com a sua complexidade.</p>
-            <div>
-              <p class="mini-label">Para quem atuamos</p>
-              <ul class="plain">
-                <li>Empresas e grupos empresariais</li>
-                <li>Sócios e empresários</li>
-                <li>Famílias empresárias</li>
-                <li>Executivos e profissionais liberais</li>
-              </ul>
+    </section>
+
+    <!-- Pré-atendimento -->
+    <section class="section intake" id="conversa" aria-labelledby="conversa-title">
+      <div class="frame intake-grid">
+        <header class="section-head intake-head" data-reveal>
+          <p class="label">Agendar uma conversa</p>
+          <h2 id="conversa-title">Comece pela fase em que você está.</h2>
+          <p class="section-lede">Três escolhas montam uma mensagem curta para o escritório. Você revisa antes de enviar.</p>
+        </header>
+
+        <form class="intake-form" data-intake data-reveal novalidate>
+          <fieldset>
+            <legend><span>1</span>Em que fase está a sua questão?</legend>
+            <div class="choices">
+              <label><input type="radio" name="fase" value="fundar" checked><span><b aria-hidden="true">I</b>Fundar</span></label>
+              <label><input type="radio" name="fase" value="crescer"><span><b aria-hidden="true">II</b>Crescer</span></label>
+              <label><input type="radio" name="fase" value="organizar"><span><b aria-hidden="true">III</b>Organizar</span></label>
+              <label><input type="radio" name="fase" value="suceder"><span><b aria-hidden="true">IV</b>Suceder</span></label>
+              <label><input type="radio" name="fase" value="resolver"><span><b aria-hidden="true">V</b>Resolver</span></label>
             </div>
-          </div>
-          <ul class="tenets reveal" aria-label="Princípios de atuação">
-            <li><strong>Proximidade</strong>Comunicação direta durante todo o trabalho.</li>
-            <li><strong>Discrição</strong>Confidencialidade no tratamento das informações.</li>
-            <li><strong>Clareza</strong>Questões complexas traduzidas em cenários compreensíveis.</li>
-          </ul>
-        </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>2</span>Existe algum prazo?</legend>
+            <div class="choices">
+              <label><input type="radio" name="prazo" value="sem" checked><span>Sem prazo definido</span></label>
+              <label><input type="radio" name="prazo" value="semanas"><span>Nas próximas semanas</span></label>
+              <label><input type="radio" name="prazo" value="correndo"><span>Há um prazo correndo</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>3</span>Como prefere o retorno?</legend>
+            <div class="choices">
+              <label><input type="radio" name="retorno" value="whatsapp" checked><span>WhatsApp</span></label>
+              <label><input type="radio" name="retorno" value="ligacao"><span>Ligação</span></label>
+              <label><input type="radio" name="retorno" value="email"><span>E-mail</span></label>
+            </div>
+            <label class="field" for="nome">
+              <span>Seu nome <small>(opcional)</small></span>
+            </label>
+            <input id="nome" type="text" name="nome" autocomplete="name" maxlength="60">
+          </fieldset>
+        </form>
+
+        <aside class="letter" data-reveal aria-labelledby="letter-title">
+          <p class="label" id="letter-title">Sua mensagem</p>
+          <p class="letter-body" data-letter aria-live="polite">Olá. Gostaria de agendar uma conversa sobre a abertura de uma empresa ou sociedade. Não há prazo definido. Prefiro retorno pelo WhatsApp.</p>
+          <p class="letter-note" data-letter-note hidden>Se houver um prazo, tenha a data em mãos na conversa.</p>
+          <button type="button" class="btn btn-block" data-send>Agendar uma conversa</button>
+          <p class="fine">Não envie documentos ou detalhes sigilosos por aqui. Esta mensagem só agenda a conversa e não constitui consulta jurídica.</p>
+        </aside>
       </div>
     </section>
 
-    <!-- IV. Sócios -->
-    <section class="section partners" id="socios">
-      <div class="wrap doc">
-        <aside class="margin reveal"><span class="sec">IV</span>Sócios</aside>
-        <div class="doc-body">
-          <h2 class="reveal reveal-mask">Quem está à frente do escritório.</h2>
-          <div class="partner-list">
-            <article class="partner reveal">
-              <div class="portrait" role="img" aria-label="Espaço reservado para o retrato de Eduardo Valença">
-                <span aria-hidden="true">E<i>V</i></span>
-                <small>Retrato a definir</small>
-              </div>
-              <div>
-                <p class="mini-label">Sócio</p>
-                <h3>Eduardo Valença</h3>
-                <p>Direito Empresarial, Societário e Contratos.</p>
-                <p class="oab" data-placeholder="oab">OAB/MT 00.000</p>
-              </div>
-            </article>
-            <article class="partner reveal">
-              <div class="portrait" role="img" aria-label="Espaço reservado para o retrato de Mariana Prado">
-                <span aria-hidden="true">M<i>P</i></span>
-                <small>Retrato a definir</small>
-              </div>
-              <div>
-                <p class="mini-label">Sócia</p>
-                <h3>Mariana Prado</h3>
-                <p>Planejamento Patrimonial e Sucessório e Contencioso Estratégico.</p>
-                <p class="oab" data-placeholder="oab">OAB/MT 00.000</p>
-              </div>
-            </article>
+    <!-- Compromissos -->
+    <section class="section commitments" id="compromissos" aria-labelledby="compromissos-title">
+      <div class="frame">
+        <header class="section-head" data-reveal>
+          <p class="label">Compromissos</p>
+          <h2 id="compromissos-title">O que você pode esperar, e o que não prometemos.</h2>
+        </header>
+        <dl class="ledger">
+          <div class="ledger-row" data-reveal>
+            <dt>Sigilo</dt>
+            <dd>O que você conta ao escritório é protegido pelo sigilo profissional do advogado, desde a primeira conversa.</dd>
           </div>
-          <p class="fine reveal">Profissionais e números de inscrição fictícios, usados apenas para fins de portfólio.</p>
-        </div>
+          <div class="ledger-row" data-reveal>
+            <dt>Honorários por escrito</dt>
+            <dd>Os valores são definidos depois de entender o caso, com referência na tabela da OAB/MT, e combinados em contrato antes de qualquer trabalho.</dd>
+          </div>
+          <div class="ledger-row" data-reveal>
+            <dt>Nenhuma promessa de resultado</dt>
+            <dd>A advocacia é uma obrigação de meio. O compromisso é com a qualidade do trabalho, não com um desfecho que depende de terceiros.</dd>
+          </div>
+        </dl>
       </div>
     </section>
 
-    <!-- V. Dúvidas -->
-    <section class="section faq" id="faq">
-      <div class="wrap doc">
-        <aside class="margin reveal"><span class="sec">V</span>Dúvidas</aside>
-        <div class="doc-body">
-          <h2 class="reveal reveal-mask">Antes do primeiro contato.</h2>
-          <div class="faq-list reveal rule-draw">
-            <details>
-              <summary>O escritório atende apenas empresas?</summary>
-              <p>Não. Além da atuação empresarial, o escritório trabalha com questões patrimoniais e sucessórias de pessoas e famílias, especialmente quando o patrimônio pessoal tem relação com uma atividade empresarial.</p>
-            </details>
-            <details>
-              <summary>É possível procurar o escritório antes de existir um problema?</summary>
-              <p>Sim. Boa parte da atuação é consultiva e preventiva: a análise jurídica acontece antes da tomada de decisão.</p>
-            </details>
-            <details>
-              <summary>O escritório elabora e revisa contratos?</summary>
-              <p>Sim. A atuação contratual inclui elaboração, revisão e análise de instrumentos ligados às áreas atendidas pelo escritório.</p>
-            </details>
-            <details>
-              <summary>Como funciona o primeiro contato?</summary>
-              <p>O primeiro contato serve para entender, de forma inicial, a natureza da demanda e verificar a possibilidade de atendimento. Quando for o caso, é agendada uma reunião para aprofundar o contexto.</p>
-            </details>
-            <details>
-              <summary>O escritório atende clientes fora de Cuiabá?</summary>
-              <p>Sim. Conforme a natureza da demanda, o atendimento pode ser presencial ou por meios digitais.</p>
-            </details>
-            <details>
-              <summary>As informações deste site substituem uma consulta?</summary>
-              <p>Não. O conteúdo tem caráter apenas informativo. Cada situação depende de fatos e documentos específicos, que precisam ser analisados por um advogado.</p>
-            </details>
-          </div>
+    <!-- Sócios -->
+    <section class="section partners" id="socios" aria-labelledby="socios-title">
+      <div class="frame">
+        <header class="section-head" data-reveal>
+          <p class="label">Sócios</p>
+          <h2 id="socios-title">Dois sócios, cada um à frente de uma parte da prática.</h2>
+        </header>
+        <div class="partner-grid">
+          <article class="partner" data-reveal>
+            <div class="monogram" role="img" aria-label="Espaço reservado para o retrato de Eduardo Valença">
+              <span aria-hidden="true">E<i>V</i></span>
+              <small>Retrato a definir</small>
+            </div>
+            <h3>Eduardo Valença</h3>
+            <p class="partner-role">Sócio · Fases I e II</p>
+            <p>Conduz a prática societária e contratual: fundação, crescimento e reorganização de empresas.</p>
+            <p class="oab" data-placeholder="oab">OAB/MT 00.000</p>
+          </article>
+          <article class="partner" data-reveal>
+            <div class="monogram" role="img" aria-label="Espaço reservado para o retrato de Mariana Prado">
+              <span aria-hidden="true">M<i>P</i></span>
+              <small>Retrato a definir</small>
+            </div>
+            <h3>Mariana Prado</h3>
+            <p class="partner-role">Sócia · Fases III, IV e V</p>
+            <p>Conduz a prática patrimonial, sucessória e contenciosa: organização de bens, sucessão e conflitos.</p>
+            <p class="oab" data-placeholder="oab">OAB/MT 00.000</p>
+          </article>
         </div>
+        <p class="fine partners-note">Profissionais e números de inscrição fictícios, usados apenas para fins de portfólio.</p>
       </div>
     </section>
 
-    <!-- Contato -->
-    <section class="contact" id="contato">
-      <div class="wrap contact-grid">
-        <div class="contact-copy reveal">
-          <p class="kicker">Contato</p>
-          <h2 class="reveal-mask">Apresente o contexto da sua questão.</h2>
-          <p>Se a sua empresa, sociedade ou patrimônio está diante de uma decisão relevante, entre em contato. O escritório avalia a demanda e informa se e como pode atender.</p>
-          <a class="btn btn-light" href="#pre-atendimento">Iniciar pré-atendimento</a>
+    <!-- Escritório -->
+    <section class="section office" id="escritorio" aria-labelledby="escritorio-title">
+      <figure class="frame window office-window" data-window>
+        <div class="window-pane">
+          <img src="assets/sala-de-reuniao.webp" width="1300" height="868" alt="" loading="lazy">
         </div>
-        <dl class="contact-list reveal">
-          <div><dt>Endereço</dt><dd data-placeholder="endereco">Praça da República, s/n<br>Centro Norte · Cuiabá, MT</dd></div>
+        <figcaption class="label">Imagem ilustrativa</figcaption>
+      </figure>
+
+      <div class="frame office-grid">
+        <header class="section-head" data-reveal>
+          <p class="label">Escritório</p>
+          <h2 id="escritorio-title">Com hora marcada, em Cuiabá ou por videochamada.</h2>
+        </header>
+
+        <dl class="visit" data-reveal>
+          <div><dt>Endereço</dt><dd data-placeholder="endereco">Praça da República, s/n · Centro Norte<br>Cuiabá, MT</dd></div>
           <div><dt>Telefone</dt><dd data-placeholder="telefone">(65) 0000-0000</dd></div>
           <div><dt>E-mail</dt><dd data-placeholder="email">contato@valencaeprado.com.br</dd></div>
-          <div><dt>Atendimento</dt><dd>Com hora marcada</dd></div>
-          <p class="fine">Endereço, telefone e e-mail fictícios deste projeto conceitual.</p>
+          <div><dt>Horário</dt><dd data-placeholder="horario">Segunda a sexta, com agendamento</dd></div>
         </dl>
+
+        <div class="faq" data-reveal>
+          <p class="label">Antes de vir</p>
+          <details>
+            <summary>Preciso levar documentos na primeira conversa?</summary>
+            <p>Não é obrigatório. Se tiver contrato social, contratos ou escrituras ligados ao assunto, leve: eles ajudam a entender o contexto.</p>
+          </details>
+          <details>
+            <summary>O escritório atende fora de Cuiabá?</summary>
+            <p>Sim, por videochamada, e presencialmente quando o caso pedir.</p>
+          </details>
+          <details>
+            <summary>As informações deste site substituem uma consulta?</summary>
+            <p>Não. Elas são gerais e não analisam a sua situação, que depende de fatos e documentos específicos.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fechamento -->
+    <section class="close" aria-labelledby="close-title">
+      <div class="frame close-inner" data-reveal>
+        <p class="label">Próximo passo</p>
+        <h2 id="close-title">Uma conversa costuma ser o melhor <em>primeiro passo.</em></h2>
+        <a class="btn" href="#conversa">Agendar uma conversa</a>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="wrap footer-grid">
-      <p class="wordmark">Valença <i>&amp;</i> Prado <small>Advocacia</small></p>
+  <footer class="foot">
+    <div class="frame foot-grid">
+      <p class="mark">Valença <i>&amp;</i> Prado</p>
       <nav aria-label="Rodapé">
         <a href="#atuacao">Atuação</a>
-        <a href="#pre-atendimento">Pré-atendimento</a>
+        <a href="#compromissos">Compromissos</a>
         <a href="#socios">Sócios</a>
-        <a href="#contato">Contato</a>
+        <a href="#escritorio">Escritório</a>
       </nav>
-      <div class="legal">
+      <div class="foot-legal">
         <p data-placeholder="registro-sociedade">Valença &amp; Prado Sociedade de Advogados · Registro OAB/MT nº 0.000</p>
-        <p>O conteúdo deste site tem caráter informativo e não substitui a análise de um advogado sobre o caso concreto.</p>
+        <p>As informações deste site têm caráter informativo e não substituem a análise de um advogado sobre o caso concreto.</p>
         <p>Projeto fictício desenvolvido para fins de portfólio.</p>
       </div>
     </div>
   </footer>
 
-  <a class="float-cta" href="#pre-atendimento">Pré-atendimento</a>
-
-  <dialog class="sent-dialog" data-dialog aria-labelledby="dlg-title">
+  <dialog class="sheet" data-dialog aria-labelledby="sheet-title">
     <form method="dialog">
-      <button class="dlg-close" value="close" aria-label="Fechar">×</button>
-      <p class="mini-label">Demonstração</p>
-      <h2 id="dlg-title">A mensagem chegaria assim ao escritório.</h2>
-      <blockquote data-out="message"></blockquote>
-      <p class="fine">Neste projeto conceitual nenhuma mensagem é enviada. Em um site real, o WhatsApp ou o e-mail do escritório abre com este texto, que ainda pode ser editado antes do envio.</p>
-      <div class="dlg-actions">
-        <button type="button" class="btn btn-solid" data-copy>Copiar mensagem</button>
-        <button class="btn btn-line" value="close">Fechar</button>
+      <button class="sheet-close" value="close" aria-label="Fechar">×</button>
+      <p class="label">Demonstração</p>
+      <h2 id="sheet-title">A mensagem chegaria assim ao escritório.</h2>
+      <p class="letter-body" data-letter></p>
+      <p class="fine">Neste projeto conceitual nada é enviado. Em um site real, o WhatsApp ou o e-mail do escritório abre com este texto, que ainda pode ser editado.</p>
+      <div class="sheet-actions">
+        <button type="button" class="btn" data-copy>Copiar mensagem</button>
+        <button class="quiet-link" value="close">Fechar</button>
       </div>
     </form>
   </dialog>

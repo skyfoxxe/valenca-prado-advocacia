@@ -1,160 +1,203 @@
-// Valença & Prado — v5
+// Valença & Prado — v6
 // Para um escritório real, preencha (só dígitos, com DDI e DDD, ex.: '5565999999999')
-// e o e-mail. Vazios = modo demonstração.
+// e o e-mail. Vazios = modo demonstração (abre o diálogo com a mensagem).
 const WHATSAPP_NUMBER = '';
 const CONTACT_EMAIL = '';
 
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const hasIO = 'IntersectionObserver' in window;
+
 // ---------- Menu ----------
-const toggle = document.querySelector('.menu-toggle');
-const menu = document.querySelector('.menu');
-if (toggle && menu) {
-  const label = toggle.querySelector('span');
-  const setMenu = open => {
-    menu.classList.toggle('is-open', open);
+const toggle = document.querySelector('.nav-toggle');
+const nav = document.getElementById('nav');
+if (toggle && nav) {
+  const setNav = open => {
+    nav.classList.toggle('is-open', open);
     toggle.setAttribute('aria-expanded', String(open));
-    toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
-    if (label) label.textContent = open ? 'Fechar' : 'Menu';
+    toggle.textContent = open ? 'Fechar' : 'Menu';
   };
-  toggle.addEventListener('click', () => setMenu(!menu.classList.contains('is-open')));
-  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+  toggle.addEventListener('click', () => setNav(!nav.classList.contains('is-open')));
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setNav(false)));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) { setNav(false); toggle.focus(); }
+  });
 }
 
-// ---------- Revelação ----------
-// Uma entrada por bloco. Irmãos que entram juntos ganham 60ms de atraso cada
-// (no próprio elemento, nunca por variável no pai). Com movimento reduzido,
-// o CSS remove o deslocamento e mantém só o fade.
-const revealEls = document.querySelectorAll('.reveal, .rule-draw, .reveal-mask');
-document.querySelectorAll('.reveal').forEach(el => {
-  const siblings = [...el.parentElement.children].filter(c => c.classList.contains('reveal'));
-  const i = siblings.indexOf(el);
-  if (siblings.length > 1 && i > 0) el.style.transitionDelay = `${Math.min(i, 4) * 60}ms`;
+// ---------- Cabeçalho: linha fina aparece depois da abertura ----------
+const topBar = document.querySelector('[data-top]');
+const hero = document.querySelector('.hero');
+if (topBar && hero && hasIO) {
+  new IntersectionObserver(([e]) => topBar.classList.toggle('is-stuck', !e.isIntersecting), {
+    rootMargin: '-80px 0px 0px 0px', threshold: 0
+  }).observe(document.querySelector('.hero-grid') || hero);
+}
+
+// ---------- Abertura ----------
+// O título é dividido em palavras, cada uma dentro da própria máscara.
+// O atraso fica no próprio elemento que se move.
+const title = document.querySelector('[data-split]');
+if (title) {
+  title.setAttribute('aria-label', title.textContent.replace(/\s+/g, ' ').trim());
+  let n = 0;
+  const wrap = word => {
+    const w = document.createElement('span');
+    w.className = 'w';
+    w.setAttribute('aria-hidden', 'true');
+    const inner = document.createElement('span');
+    inner.textContent = word;
+    inner.style.transitionDelay = `${120 + n++ * 45}ms`;
+    w.append(inner);
+    return w;
+  };
+  const splitInto = (source, target) => {
+    [...source.childNodes].forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        node.textContent.split(/(\s+)/).forEach(part => {
+          if (!part) return;
+          target.append(/^\s+$/.test(part) ? document.createTextNode(' ') : wrap(part));
+        });
+      } else {
+        const clone = node.cloneNode(false);
+        splitInto(node, clone);
+        target.append(clone);
+      }
+    });
+  };
+  const frag = document.createDocumentFragment();
+  splitInto(title, frag);
+  title.replaceChildren(frag);
+}
+document.querySelectorAll('.hero-index li[data-hero]').forEach((li, i) => {
+  li.style.transitionDelay = `${420 + i * 70}ms`;
 });
-// Títulos com máscara (clip-path) são observados pelo bloco pai: o próprio
-// recorte os deixaria fora da interseção.
-const show = el => {
-  el.classList.add('is-visible');
-  el.addEventListener('transitionend', () => { el.style.transitionDelay = ''; }, { once: true });
+if (hero) {
+  // Espera as fontes (até 700ms) para que a máscara não corte a palavra errada.
+  const start = () => requestAnimationFrame(() => hero.classList.add('is-in'));
+  const fonts = document.fonts?.ready ?? Promise.resolve();
+  Promise.race([fonts, new Promise(r => setTimeout(r, 700))]).then(start);
+}
+
+// ---------- Revelação de blocos ----------
+// Cada bloco entra uma vez. Os que entram no mesmo instante são escalonados em 80ms.
+const revealEls = document.querySelectorAll('[data-reveal], .office-window');
+const reveal = (el, delay) => {
+  if (delay) {
+    el.style.transitionDelay = `${delay}ms`;
+    el.addEventListener('transitionend', () => { el.style.transitionDelay = ''; }, { once: true });
+  }
+  el.classList.add('is-in');
 };
-if ('IntersectionObserver' in window) {
-  const watchers = new Map();
-  revealEls.forEach(el => {
-    const target = el.classList.contains('reveal-mask') ? el.parentElement : el;
-    if (!watchers.has(target)) watchers.set(target, []);
-    watchers.get(target).push(el);
-  });
+if (hasIO) {
   const io = new IntersectionObserver(entries => {
+    let i = 0;
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-      watchers.get(entry.target).forEach(show);
+      reveal(entry.target, Math.min(i++, 4) * 80);
       io.unobserve(entry.target);
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  watchers.forEach((_, target) => io.observe(target));
+  }, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
+  revealEls.forEach(el => io.observe(el));
 } else {
-  revealEls.forEach(el => el.classList.add('is-visible'));
+  revealEls.forEach(el => el.classList.add('is-in'));
+}
+
+// ---------- Mostrador das fases ----------
+const dial = document.querySelector('.dial-inner');
+const dialNum = document.querySelector('[data-dial-num]');
+const dialName = document.querySelector('[data-dial-name]');
+const dialFill = document.querySelector('[data-dial-fill]');
+const phaseList = document.querySelector('.phase-list');
+const phases = [...document.querySelectorAll('.phase[data-phase]')];
+
+if (dial && dialNum && dialName && dialFill && phaseList && phases.length && hasIO) {
+  let current = null;
+  let swapTimer;
+  const setPhase = el => {
+    if (el === current) return;
+    current = el;
+    phases.forEach(p => p.classList.toggle('is-active', p === el));
+    const apply = () => { dialNum.textContent = el.dataset.phase; dialName.textContent = el.dataset.name; };
+    if (reduceMotion.matches) { apply(); return; }
+    clearTimeout(swapTimer);
+    dial.classList.add('is-swapping');
+    swapTimer = setTimeout(() => { apply(); dial.classList.remove('is-swapping'); }, 140);
+  };
+  const po = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) setPhase(e.target); });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  phases.forEach(p => po.observe(p));
+
+  // Progresso: a linha do mostrador acompanha a leitura das cinco fases.
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const r = phaseList.getBoundingClientRect();
+    const mid = window.innerHeight / 2;
+    const p = Math.min(1, Math.max(0, (mid - r.top) / r.height));
+    dialFill.style.transform = `scaleY(${p.toFixed(4)})`;
+  };
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+  new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) { window.addEventListener('scroll', onScroll, { passive: true }); update(); }
+    else window.removeEventListener('scroll', onScroll);
+  }).observe(phaseList);
 }
 
 // ---------- Pré-atendimento ----------
-const DATA = {
-  topics: {
-    empresa: {
-      label: 'Empresa', practice: 'Direito Empresarial', first: 'Contexto, riscos e objetivos',
-      text: 'Questões empresariais podem envolver estrutura, responsabilidades, relações entre sócios e decisões que afetam a operação e a continuidade do negócio.',
-      titles: {
-        prevenir: 'Estruturar antes de assumir novos riscos.',
-        decidir: 'Dar contexto jurídico a uma decisão empresarial.',
-        reorganizar: 'Rever a estrutura sem perder de vista a operação.',
-        resolver: 'Organizar a estratégia quando o conflito já existe.'
-      }
-    },
-    contratos: {
-      label: 'Contratos', practice: 'Societário e Contratos', first: 'Relações, obrigações e efeitos futuros',
-      text: 'Contratos relevantes pedem leitura do negócio, das obrigações assumidas e das consequências que podem surgir ao longo da relação entre as partes.',
-      titles: {
-        prevenir: 'Construir o contrato antes que a relação gere ruído.',
-        decidir: 'Avaliar o que uma assinatura coloca em jogo.',
-        reorganizar: 'Revisar contratos que deixaram de refletir a realidade.',
-        resolver: 'Mapear alternativas quando a relação contratual entrou em tensão.'
-      }
-    },
-    patrimonio: {
-      label: 'Patrimônio', practice: 'Patrimonial e Sucessório', first: 'Bens, pessoas e continuidade',
-      text: 'Decisões patrimoniais e sucessórias exigem olhar conjunto para os bens, as relações familiares ou empresariais e os efeitos que se estendem no tempo.',
-      titles: {
-        prevenir: 'Organizar hoje o que precisa continuar amanhã.',
-        decidir: 'Comparar caminhos antes de reorganizar o patrimônio.',
-        reorganizar: 'Adequar a estrutura patrimonial ao momento atual.',
-        resolver: 'Compreender o cenário quando interesses patrimoniais entram em conflito.'
-      }
-    },
-    conflitos: {
-      label: 'Conflitos', practice: 'Contencioso Estratégico', first: 'Riscos, alternativas e consequências',
-      text: 'Conflitos empresariais e patrimoniais pedem análise do risco, dos interesses envolvidos e dos efeitos de cada alternativa antes de definir a estratégia.',
-      titles: {
-        prevenir: 'Reconhecer sinais de conflito antes da ruptura.',
-        decidir: 'Escolher um caminho com visão das consequências.',
-        reorganizar: 'Reavaliar posições quando o cenário muda.',
-        resolver: 'Tratar o conflito como uma decisão, não como um reflexo.'
-      }
-    }
+const TEXT = {
+  fase: {
+    fundar: 'a abertura de uma empresa ou sociedade',
+    crescer: 'contratos, a entrada de sócios ou o crescimento da empresa',
+    organizar: 'a organização do patrimônio da família e da empresa',
+    suceder: 'sucessão e a passagem de bens para a próxima geração',
+    resolver: 'um desacordo que já existe entre sócios, parceiros ou herdeiros'
   },
-  moments: {
-    prevenir: { label: 'Prevenção', phrase: 'Meu objetivo é prevenir problemas antes de tomar uma decisão.' },
-    decidir: { label: 'Decisão', phrase: 'Estou diante de uma decisão e gostaria de entender os aspectos jurídicos envolvidos.' },
-    reorganizar: { label: 'Reorganização', phrase: 'Quero reorganizar uma situação existente e avaliar alternativas.' },
-    resolver: { label: 'Conflito existente', phrase: 'Já existe um conflito e gostaria de apresentar o contexto para uma avaliação inicial.' }
+  prazo: {
+    sem: 'Não há prazo definido.',
+    semanas: 'Gostaria de conversar nas próximas semanas.',
+    correndo: 'Há um prazo correndo.'
   },
-  replies: {
-    whatsapp: { phrase: 'Prefiro retorno pelo WhatsApp.', button: 'Enviar pelo WhatsApp' },
-    telefone: { phrase: 'Prefiro retorno por ligação.', button: 'Enviar pelo WhatsApp' },
-    email: { phrase: 'Prefiro retorno por e-mail.', button: 'Enviar por e-mail' }
+  retorno: {
+    whatsapp: 'Prefiro retorno pelo WhatsApp.',
+    ligacao: 'Prefiro retorno por ligação.',
+    email: 'Prefiro retorno por e-mail.'
   }
 };
 
 const form = document.querySelector('[data-intake]');
-const brief = document.querySelector('.brief');
+const letter = document.querySelector('.letter');
+const note = document.querySelector('[data-letter-note]');
 const sendBtn = document.querySelector('[data-send]');
 
 function state() {
   const v = name => form?.querySelector(`input[name="${name}"]:checked`)?.value;
   const nome = (form?.querySelector('input[name="nome"]')?.value || '').trim().replace(/\s+/g, ' ');
-  return { topic: v('tema') || 'empresa', moment: v('momento') || 'prevenir', reply: v('retorno') || 'whatsapp', nome };
+  return { fase: v('fase') || 'fundar', prazo: v('prazo') || 'sem', retorno: v('retorno') || 'whatsapp', nome };
 }
 
 function buildMessage(s = state()) {
-  const t = DATA.topics[s.topic];
-  const greeting = s.nome ? `Olá, meu nome é ${s.nome}.` : 'Olá.';
-  return `${greeting} Conheci a Valença & Prado pelo site. Minha questão está relacionada a ${t.label.toLowerCase()}. ${DATA.moments[s.moment].phrase} ${DATA.replies[s.reply].phrase}`;
+  const hello = s.nome ? `Olá, meu nome é ${s.nome}.` : 'Olá.';
+  return `${hello} Gostaria de agendar uma conversa sobre ${TEXT.fase[s.fase]}. ${TEXT.prazo[s.prazo]} ${TEXT.retorno[s.retorno]}`;
 }
 
-function setOut(key, value) {
-  document.querySelectorAll(`[data-out="${key}"]`).forEach(el => { el.textContent = value; });
+function writeLetter() {
+  const message = buildMessage();
+  document.querySelectorAll('[data-letter]').forEach(el => { el.textContent = message; });
+  if (note) note.hidden = state().prazo !== 'correndo';
 }
 
+let changeTimer;
 function render(animate) {
-  const s = state();
-  const t = DATA.topics[s.topic];
-  const apply = () => {
-    setOut('code', `${t.label} · ${DATA.moments[s.moment].label}`);
-    setOut('title', t.titles[s.moment]);
-    setOut('text', t.text);
-    setOut('practice', t.practice);
-    setOut('first', t.first);
-    setOut('message', buildMessage());
-    if (sendBtn) sendBtn.textContent = DATA.replies[s.reply].button;
-  };
-  if (animate && brief) {
-    brief.classList.add('is-changing');
-    setTimeout(() => { apply(); brief.classList.remove('is-changing'); }, 160);
-  } else {
-    apply();
-  }
+  clearTimeout(changeTimer);
+  if (!animate || !letter || reduceMotion.matches) { writeLetter(); return; }
+  letter.classList.add('is-changing');
+  // Vale sempre a última escolha: o texto é montado na hora da troca.
+  changeTimer = setTimeout(() => { writeLetter(); letter.classList.remove('is-changing'); }, 140);
 }
 
 if (form) {
-  form.addEventListener('change', () => render(true));
-  form.addEventListener('input', e => { if (e.target.name === 'nome') setOut('message', buildMessage()); });
+  form.addEventListener('change', e => { if (e.target.name !== 'nome') render(true); });
+  form.addEventListener('input', e => { if (e.target.name === 'nome') render(false); });
   form.addEventListener('submit', e => e.preventDefault());
   render(false);
 }
@@ -165,24 +208,32 @@ if (sendBtn) {
   sendBtn.addEventListener('click', () => {
     const s = state();
     const message = buildMessage(s);
-    if (s.reply === 'email' && CONTACT_EMAIL) {
-      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Pré-atendimento pelo site')}&body=${encodeURIComponent(message)}`;
+    if (s.retorno === 'email' && CONTACT_EMAIL) {
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Agendar uma conversa')}&body=${encodeURIComponent(message)}`;
       return;
     }
-    if (s.reply !== 'email' && WHATSAPP_NUMBER) {
+    if (s.retorno !== 'email' && WHATSAPP_NUMBER) {
       window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
       return;
     }
-    setOut('message', message);
+    writeLetter();
     if (!dialog) return;
     if (typeof dialog.showModal === 'function') dialog.showModal();
     else dialog.setAttribute('open', '');
   });
 }
-if (dialog) dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
+if (dialog) {
+  dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
+  if (typeof dialog.showModal !== 'function') {
+    dialog.querySelectorAll('[value="close"]').forEach(b => b.addEventListener('click', e => {
+      e.preventDefault(); dialog.removeAttribute('open'); sendBtn?.focus();
+    }));
+  }
+}
 
 const copyBtn = document.querySelector('[data-copy]');
 if (copyBtn) {
+  let copyTimer;
   copyBtn.addEventListener('click', async () => {
     try {
       await navigator.clipboard.writeText(buildMessage());
@@ -190,18 +241,7 @@ if (copyBtn) {
     } catch {
       copyBtn.textContent = 'Selecione o texto para copiar';
     }
-    setTimeout(() => { copyBtn.textContent = 'Copiar mensagem'; }, 2000);
+    clearTimeout(copyTimer);
+    copyTimer = setTimeout(() => { copyBtn.textContent = 'Copiar mensagem'; }, 2000);
   });
-}
-
-// ---------- Atalho flutuante some onde já existe chamada visível ----------
-const floatCta = document.querySelector('.float-cta');
-const zones = document.querySelectorAll('.hero, #pre-atendimento, #contato, .site-footer');
-if (floatCta && 'IntersectionObserver' in window) {
-  const visible = new Set();
-  const zo = new IntersectionObserver(entries => {
-    entries.forEach(e => (e.isIntersecting ? visible.add(e.target) : visible.delete(e.target)));
-    floatCta.classList.toggle('is-hidden', visible.size > 0);
-  }, { threshold: 0.04 });
-  zones.forEach(z => zo.observe(z));
 }
