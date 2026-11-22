@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Projeto conceitual de portfólio: site de um escritório fictício de advocacia societária, contratual, patrimonial e sucessória em Cuiabá, MT." />
   <meta name="robots" content="index,follow,max-image-preview:large" />
-  <meta name="theme-color" content="#F7F2EA" />
+  <meta name="theme-color" content="#14251E" />
   <link rel="canonical" href="https://valencapradoadvocacia.vercel.app/" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="pt_BR" />
@@ -54,32 +54,51 @@
 
   <main id="conteudo">
 
-    <!-- Abertura (composição da versão anterior) -->
-    <section class="hero" id="inicio">
-      <div class="frame hero-grid">
-        <div class="hero-main">
-          <p class="label hero-kicker" data-hero="1">Advocacia empresarial e patrimonial <span>Cuiabá · MT</span></p>
-          <h1 class="hero-title"><span class="line"><span class="line-in">Antes da decisão,</span></span> <span class="line"><em class="line-in">o contexto.</em></span></h1>
-          <p class="hero-sub" data-hero="3">Assessoria jurídica para empresas, sócios e famílias em decisões que envolvem negócios, patrimônio e continuidade.</p>
-          <div class="hero-actions" data-hero="4">
-            <a class="btn" href="#conversa">Agendar uma conversa</a>
-            <a class="quiet-link" href="#atuacao">Áreas de atuação</a>
-          </div>
+    <!-- Abertura: sala escura, título largo e o índice das cinco fases -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="frame hero-inner">
+        <div class="hero-meta">
+          <p class="label">Advocacia empresarial e patrimonial</p>
+          <p class="label">Cuiabá · Mato Grosso</p>
         </div>
 
-        <figure class="hero-photo" data-hero-photo>
-          <div class="window-pane">
-            <picture>
-              <source media="(max-width: 760px)" srcset="assets/escritorio-corredor-800.webp 800w, assets/escritorio-corredor.webp 1400w" sizes="100vw" width="800" height="534">
-              <img src="assets/escritorio-corredor-retrato.webp" srcset="assets/escritorio-corredor-retrato-480.webp 480w, assets/escritorio-corredor-retrato.webp 701w" sizes="(max-width: 1024px) 40vw, 400px" width="701" height="935" alt="" fetchpriority="high">
-            </picture>
-          </div>
-          <figcaption class="label">Imagem ilustrativa</figcaption>
-        </figure>
-      </div>
+        <h1 class="hero-title" id="hero-title"><span class="line"><span class="line-in">Antes da decisão,</span></span> <span class="line line-2"><em class="line-in">o contexto.</em></span></h1>
 
-      <p class="frame concept">Projeto conceitual de portfólio. O escritório, as pessoas, os números de OAB, o endereço e os contatos são fictícios.</p>
+        <div class="hero-foot">
+          <div class="hero-lead">
+            <p class="hero-sub">Assessoria jurídica para empresas, sócios e famílias em decisões que envolvem negócios, patrimônio e continuidade.</p>
+            <div class="hero-actions">
+              <a class="btn btn-light" href="#conversa">Agendar uma conversa</a>
+            </div>
+          </div>
+
+          <nav class="hero-index" aria-label="Encontre a sua fase">
+            <p class="label hero-index-label" data-hero-index>Em que fase você está?</p>
+            <ol>
+              <li data-hero-index><a href="#fase-fundar"><span class="hi-num">I</span><span class="hi-name">Fundar</span><span class="hi-cue">Abrir a empresa</span></a></li>
+              <li data-hero-index><a href="#fase-crescer"><span class="hi-num">II</span><span class="hi-name">Crescer</span><span class="hi-cue">Contratos e investidores</span></a></li>
+              <li data-hero-index><a href="#fase-organizar"><span class="hi-num">III</span><span class="hi-name">Organizar</span><span class="hi-cue">Família e patrimônio</span></a></li>
+              <li data-hero-index><a href="#fase-suceder"><span class="hi-num">IV</span><span class="hi-name">Suceder</span><span class="hi-cue">A próxima geração</span></a></li>
+              <li data-hero-index><a href="#fase-resolver"><span class="hi-num">V</span><span class="hi-name">Resolver</span><span class="hi-cue">Quando há desacordo</span></a></li>
+            </ol>
+          </nav>
+        </div>
+      </div>
     </section>
+
+    <!-- Passagem: a foto ocupa a largura toda e se abre com a rolagem -->
+    <figure class="passage">
+      <div class="passage-pane">
+        <picture>
+          <source media="(max-width: 760px)" srcset="assets/escritorio-corredor-retrato-480.webp 480w, assets/escritorio-corredor-retrato.webp 701w" sizes="100vw" width="701" height="935">
+          <img src="assets/escritorio-corredor.webp" srcset="assets/escritorio-corredor-800.webp 800w, assets/escritorio-corredor.webp 1400w" sizes="100vw" width="1400" height="934" alt="" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <figcaption class="frame passage-cap">
+        <span class="label">Imagem ilustrativa</span>
+        <span class="concept">Projeto conceitual de portfólio. O escritório, as pessoas, os números de OAB, o endereço e os contatos são fictícios.</span>
+      </figcaption>
+    </figure>
 
     <!-- Fases -->
     <section class="section phases" id="atuacao" aria-labelledby="atuacao-title">

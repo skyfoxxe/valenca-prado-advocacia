@@ -23,13 +23,18 @@ if (toggle && nav) {
   });
 }
 
-// ---------- Cabeçalho: linha fina aparece depois da abertura ----------
+// ---------- Cabeçalho: escuro sobre a abertura, pedra depois dela ----------
 const topBar = document.querySelector('[data-top]');
-const heroGrid = document.querySelector('.hero-grid');
-if (topBar && heroGrid && hasIO) {
-  new IntersectionObserver(([e]) => topBar.classList.toggle('is-stuck', !e.isIntersecting), {
-    rootMargin: '-80px 0px 0px 0px', threshold: 0
-  }).observe(heroGrid);
+const heroEl = document.querySelector('.hero');
+if (topBar && heroEl) {
+  topBar.classList.add('on-hero');
+  if (hasIO) {
+    // A faixa de observação é a própria altura do cabeçalho.
+    new IntersectionObserver(([e]) => {
+      topBar.classList.toggle('on-hero', e.isIntersecting);
+      topBar.classList.toggle('is-stuck', !e.isIntersecting);
+    }, { rootMargin: '0px 0px -92% 0px', threshold: 0 }).observe(heroEl);
+  }
 }
 
 // ---------- Movimento (taste-gsap) ----------
@@ -122,17 +127,30 @@ function startMotion() {
       const { desktop } = context.conditions;
       if (!context.conditions.motion) return;
 
-      // --- Abertura: uma timeline, expo.out, abaixo de 1,4s ---
-      const hero = document.querySelector('.hero');
+      // --- Abertura: uma timeline, expo.out, abaixo de 1,6s ---
+      // O título sobe linha a linha, a régua do topo se desenha e o índice
+      // das fases entra em cascata, da esquerda para a direita.
       const heroTl = gsap.timeline({ defaults: { ease: 'expo.out' }, onStart: ready });
       heroTl
-        .from('.hero-kicker', { autoAlpha: 0, y: 12, duration: .8 }, 0)
-        .from('.hero-title .line-in', { yPercent: 112, duration: 1.05, stagger: .11 }, .08)
-        .from(['.hero-sub', '.hero-actions'], { opacity: 0, y: 16, duration: .9, stagger: .1 }, .42)
-        .fromTo('.hero-photo .window-pane', { clipPath: 'inset(100% 0% 0% 0%)' },
-          { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.15, ease: 'expo.inOut' }, .12)
-        .from('.hero-photo img', { scale: 1.12, duration: 1.3 }, .12)
-        .from(['.hero-photo figcaption', '.concept'], { autoAlpha: 0, duration: .6, ease: 'power2.out' }, .95);
+        .fromTo('.hero-meta', { '--meta-line': 0 }, { '--meta-line': 1, duration: 1.2, ease: 'expo.inOut' }, 0)
+        .from('.hero-meta .label', { autoAlpha: 0, y: 8, duration: .7, stagger: .08 }, .15)
+        .from('.hero-title .line-in', { yPercent: 108, duration: 1.1, stagger: .12 }, .1)
+        .from('.hero-lead', { opacity: 0, y: 16, duration: .9 }, .5)
+        .from('[data-hero-index]', { opacity: 0, y: desktop ? 14 : 8, duration: .8, stagger: .06 }, .62);
+
+      // --- Passagem: a foto se abre de uma fresta até a largura toda ---
+      const passage = document.querySelector('.passage-pane');
+      if (passage) {
+        const passageImg = passage.querySelector('img');
+        gsap.fromTo(passageImg, { clipPath: desktop ? 'inset(0% 18% 0% 18%)' : 'inset(0% 8% 0% 8%)' }, {
+          clipPath: 'inset(0% 0% 0% 0%)', ease: 'none',
+          scrollTrigger: { trigger: passage, start: 'top 95%', end: 'top 20%', scrub: .6 }
+        });
+        gsap.fromTo(passageImg, { scale: 1.14 }, {
+          scale: 1, ease: 'none',
+          scrollTrigger: { trigger: passage, start: 'top bottom', end: 'bottom top', scrub: .6 }
+        });
+      }
 
       // --- Blocos: entram uma vez, em lote ---
       const blocks = gsap.utils.toArray('[data-reveal]');
