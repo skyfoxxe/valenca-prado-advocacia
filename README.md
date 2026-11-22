@@ -7,7 +7,7 @@ Site estático: `index.html`, `styles.css`, `script.js` e imagens em `assets/`. 
 ## Conceito
 Advocacia organizada pelas fases de uma empresa e de uma família: **I Fundar, II Crescer, III Organizar, IV Suceder, V Resolver**. Quem chega encontra primeiro o momento em que está, e só depois a área do direito.
 
-Gênero `quiet-luxury` do pacote design-taste, com a paleta fixa da skill: marfim `#F7F2EA`, painel `#EFE8DC`, tinta `#17130F` e um único acento latão `#9A7B4F`. Tipografia: Instrument Serif nos títulos e Instrument Sans no texto.
+Gênero `quiet-luxury` do pacote design-taste, com paleta própria, distinta da Clínica Aura: pedra `#EDEBE5`, painel `#E2DFD6`, verde-tinta `#14201B`, um único acento bordô `#7A2E27` e verde-garrafa `#14251E` na abertura. Tipografia: Instrument Serif nos títulos e Instrument Sans no texto.
 
 ## Estrutura da página
 1. Abertura: composição da versão anterior ("Antes da decisão, o contexto."), com texto à esquerda e foto vertical à direita
@@ -26,7 +26,7 @@ Feito com `taste-motion` e `taste-gsap` (GSAP 3.12 + ScrollTrigger, servidos de 
 - blocos entram uma vez, em lote (`ScrollTrigger.batch`), e as linhas finas se desenham como traço de caneta;
 - mostrador das fases com numeral que acompanha a leitura e linha preenchida pela rolagem;
 - desktop: fotos deslizam dentro da moldura e o princípio do escritório fica fixo enquanto as palavras assentam (o único pin da página);
-- linha de progresso de leitura em latão no cabeçalho;
+- linha de progresso de leitura em bordô no cabeçalho;
 - interface em CSS: hovers só com ponteiro fino, toque com `scale(.98)`, diálogo 240ms na entrada e 160ms na saída.
 
 Ficaram de fora, de propósito, os efeitos de `cinematic-motion` que brigam com o quiet luxury de um escritório de advocacia: rolagem suave (Lenis), cursor personalizado, botão magnético, carrossel arrastável e preloader.
