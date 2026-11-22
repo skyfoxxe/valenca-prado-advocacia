@@ -4,8 +4,6 @@
 const WHATSAPP_NUMBER = '';
 const CONTACT_EMAIL = '';
 
-const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
 // ---------- Menu ----------
 const toggle = document.querySelector('.menu-toggle');
 const menu = document.querySelector('.menu');
@@ -23,14 +21,36 @@ if (toggle && menu) {
 }
 
 // ---------- Revelação ----------
-const revealEls = document.querySelectorAll('.reveal');
-if (!reduced && 'IntersectionObserver' in window) {
+// Uma entrada por bloco. Irmãos que entram juntos ganham 60ms de atraso cada
+// (no próprio elemento, nunca por variável no pai). Com movimento reduzido,
+// o CSS remove o deslocamento e mantém só o fade.
+const revealEls = document.querySelectorAll('.reveal, .rule-draw, .reveal-mask');
+document.querySelectorAll('.reveal').forEach(el => {
+  const siblings = [...el.parentElement.children].filter(c => c.classList.contains('reveal'));
+  const i = siblings.indexOf(el);
+  if (siblings.length > 1 && i > 0) el.style.transitionDelay = `${Math.min(i, 4) * 60}ms`;
+});
+// Títulos com máscara (clip-path) são observados pelo bloco pai: o próprio
+// recorte os deixaria fora da interseção.
+const show = el => {
+  el.classList.add('is-visible');
+  el.addEventListener('transitionend', () => { el.style.transitionDelay = ''; }, { once: true });
+};
+if ('IntersectionObserver' in window) {
+  const watchers = new Map();
+  revealEls.forEach(el => {
+    const target = el.classList.contains('reveal-mask') ? el.parentElement : el;
+    if (!watchers.has(target)) watchers.set(target, []);
+    watchers.get(target).push(el);
+  });
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+      if (!entry.isIntersecting) return;
+      watchers.get(entry.target).forEach(show);
+      io.unobserve(entry.target);
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  revealEls.forEach(el => io.observe(el));
+  watchers.forEach((_, target) => io.observe(target));
 } else {
   revealEls.forEach(el => el.classList.add('is-visible'));
 }
@@ -124,9 +144,9 @@ function render(animate) {
     setOut('message', buildMessage());
     if (sendBtn) sendBtn.textContent = DATA.replies[s.reply].button;
   };
-  if (animate && !reduced && brief) {
+  if (animate && brief) {
     brief.classList.add('is-changing');
-    setTimeout(() => { apply(); brief.classList.remove('is-changing'); }, 200);
+    setTimeout(() => { apply(); brief.classList.remove('is-changing'); }, 160);
   } else {
     apply();
   }
