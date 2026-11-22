@@ -20,15 +20,23 @@ Gênero `quiet-luxury` do pacote design-taste, com a paleta fixa da skill: marfi
 8. Fechamento e rodapé com os dados de registro
 
 ## Movimento (faixa Estratégico)
-Feito com as skills `animate` e `review-animations`, nos tokens de `taste-motion`:
-- abertura em sequência: cada palavra do título sobe de trás da própria máscara e a foto abre de baixo para cima, como uma janela;
-- blocos entram uma vez, 14px e 600ms, escalonados em 80ms quando entram juntos;
-- linhas finas se desenham como traço de caneta;
-- mostrador das fases troca o numeral com um leve desfoque e preenche a linha conforme a leitura;
-- fotos deslizam devagar dentro da moldura com a rolagem (`animation-timeline: view()`, só onde há suporte);
-- interface: hovers só com ponteiro fino, toque com `scale(.98)`, diálogo 240ms na entrada e 160ms na saída.
+Feito com `taste-motion` e `taste-gsap` (GSAP 3.12 + ScrollTrigger, servidos de `assets/vendor/`), com `cinematic-motion` só como tempero, e revisado com `animate` e `review-animations`:
+- tudo num `gsap.context` + `gsap.matchMedia`: com movimento reduzido, sem JS ou sem GSAP, a página já está completa;
+- abertura numa timeline `expo.out` de 1,4s: as duas linhas do título sobem de trás da máscara e a foto abre de baixo para cima;
+- blocos entram uma vez, em lote (`ScrollTrigger.batch`), e as linhas finas se desenham como traço de caneta;
+- mostrador das fases com numeral que acompanha a leitura e linha preenchida pela rolagem;
+- desktop: fotos deslizam dentro da moldura e o princípio do escritório fica fixo enquanto as palavras assentam (o único pin da página);
+- linha de progresso de leitura em latão no cabeçalho;
+- interface em CSS: hovers só com ponteiro fino, toque com `scale(.98)`, diálogo 240ms na entrada e 160ms na saída.
 
-Com `prefers-reduced-motion` ou sem JavaScript, nada começa escondido.
+Ficaram de fora, de propósito, os efeitos de `cinematic-motion` que brigam com o quiet luxury de um escritório de advocacia: rolagem suave (Lenis), cursor personalizado, botão magnético, carrossel arrastável e preloader.
+
+## Desempenho (`taste-web-performance`)
+- Orçamento: LCP < 2,5s, CLS < 0,1, INP < 200ms e página abaixo de 500KB.
+- Medido no Chromium: ~300KB no total, CLS 0, LCP de 0,5s no desktop e 1,7s no celular com CPU 4x mais lenta.
+- Fontes servidas do próprio site (woff2, `font-display: swap`, as duas principais com `preload`), sem a folha de estilos externa do Google Fonts.
+- Imagens WebP com `width`/`height`, `srcset` e recorte certo para cada tela (vertical no desktop, horizontal no celular). A foto de abertura tem `fetchpriority="high"`; a do escritório, `loading="lazy"`.
+- Scripts com `defer`.
 
 ## Cuidados com a publicidade da advocacia
 Texto revisado tendo como referência o Código de Ética e Disciplina da OAB (arts. 39 a 47) e o Provimento 205/2021 do CFOAB:

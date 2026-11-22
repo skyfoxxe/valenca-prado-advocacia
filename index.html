@@ -26,16 +26,19 @@
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css" />
   <script>document.documentElement.classList.add('js')</script>
+  <script src="assets/vendor/gsap.min.js" defer></script>
+  <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
   <header class="top" data-top>
+    <span class="top-progress" data-progress aria-hidden="true"></span>
     <div class="frame top-row">
       <a class="mark" href="#inicio" aria-label="Valença & Prado, início">Valença <i>&amp;</i> Prado</a>
       <nav class="nav" id="nav" aria-label="Principal">
@@ -56,7 +59,7 @@
       <div class="frame hero-grid">
         <div class="hero-main">
           <p class="label hero-kicker" data-hero="1">Advocacia empresarial e patrimonial <span>Cuiabá · MT</span></p>
-          <h1 class="hero-title" data-split>Antes da decisão, <em>o contexto.</em></h1>
+          <h1 class="hero-title"><span class="line"><span class="line-in">Antes da decisão,</span></span> <span class="line"><em class="line-in">o contexto.</em></span></h1>
           <p class="hero-sub" data-hero="3">Assessoria jurídica para empresas, sócios e famílias em decisões que envolvem negócios, patrimônio e continuidade.</p>
           <div class="hero-actions" data-hero="4">
             <a class="btn" href="#conversa">Agendar uma conversa</a>
@@ -66,7 +69,10 @@
 
         <figure class="hero-photo" data-hero-photo>
           <div class="window-pane">
-            <img src="assets/escritorio-corredor.webp" width="1400" height="935" alt="" fetchpriority="high">
+            <picture>
+              <source media="(max-width: 760px)" srcset="assets/escritorio-corredor-800.webp 800w, assets/escritorio-corredor.webp 1400w" sizes="100vw" width="800" height="534">
+              <img src="assets/escritorio-corredor-retrato.webp" srcset="assets/escritorio-corredor-retrato-480.webp 480w, assets/escritorio-corredor-retrato.webp 701w" sizes="(max-width: 1024px) 40vw, 400px" width="701" height="935" alt="" fetchpriority="high">
+            </picture>
           </div>
           <figcaption class="label">Imagem ilustrativa</figcaption>
         </figure>
@@ -157,7 +163,7 @@
     <!-- Princípio -->
     <section class="principle" aria-label="Princípio do escritório">
       <figure class="frame principle-inner" data-reveal>
-        <blockquote>Uma boa decisão jurídica raramente é a mais rápida. É a que continua fazendo sentido <em>dez anos depois.</em></blockquote>
+        <blockquote data-dissolve>Uma boa decisão jurídica raramente é a mais rápida. É a que continua fazendo sentido <em>dez anos depois.</em></blockquote>
         <figcaption class="label">Princípio do escritório</figcaption>
       </figure>
     </section>
@@ -277,7 +283,7 @@
     <section class="section office" id="escritorio" aria-labelledby="escritorio-title">
       <figure class="frame window office-window" data-window>
         <div class="window-pane">
-          <img src="assets/sala-de-reuniao.webp" width="1300" height="868" alt="" loading="lazy">
+          <img src="assets/sala-de-reuniao.webp" srcset="assets/sala-de-reuniao-800.webp 800w, assets/sala-de-reuniao.webp 1300w" sizes="(max-width: 1320px) 100vw, 1192px" width="1300" height="868" alt="" loading="lazy" decoding="async">
         </div>
         <figcaption class="label">Imagem ilustrativa</figcaption>
       </figure>
@@ -354,6 +360,5 @@
     </form>
   </dialog>
 
-  <script src="script.js"></script>
 </body>
 </html>

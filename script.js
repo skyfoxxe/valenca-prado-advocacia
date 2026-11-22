@@ -25,80 +25,20 @@ if (toggle && nav) {
 
 // ---------- Cabeçalho: linha fina aparece depois da abertura ----------
 const topBar = document.querySelector('[data-top]');
-const hero = document.querySelector('.hero');
-if (topBar && hero && hasIO) {
+const heroGrid = document.querySelector('.hero-grid');
+if (topBar && heroGrid && hasIO) {
   new IntersectionObserver(([e]) => topBar.classList.toggle('is-stuck', !e.isIntersecting), {
     rootMargin: '-80px 0px 0px 0px', threshold: 0
-  }).observe(document.querySelector('.hero-grid') || hero);
+  }).observe(heroGrid);
 }
 
-// ---------- Abertura ----------
-// O título é dividido em palavras, cada uma dentro da própria máscara.
-// O atraso fica no próprio elemento que se move.
-const title = document.querySelector('[data-split]');
-if (title) {
-  title.setAttribute('aria-label', title.textContent.replace(/\s+/g, ' ').trim());
-  let n = 0;
-  const wrap = word => {
-    const w = document.createElement('span');
-    w.className = 'w';
-    w.setAttribute('aria-hidden', 'true');
-    const inner = document.createElement('span');
-    inner.textContent = word;
-    inner.style.transitionDelay = `${120 + n++ * 45}ms`;
-    w.append(inner);
-    return w;
-  };
-  const splitInto = (source, target) => {
-    [...source.childNodes].forEach(node => {
-      if (node.nodeType === Node.TEXT_NODE) {
-        node.textContent.split(/(\s+)/).forEach(part => {
-          if (!part) return;
-          target.append(/^\s+$/.test(part) ? document.createTextNode(' ') : wrap(part));
-        });
-      } else {
-        const clone = node.cloneNode(false);
-        splitInto(node, clone);
-        target.append(clone);
-      }
-    });
-  };
-  const frag = document.createDocumentFragment();
-  splitInto(title, frag);
-  title.replaceChildren(frag);
-}
-if (hero) {
-  // Espera as fontes (até 700ms) para que a máscara não corte a palavra errada.
-  const start = () => requestAnimationFrame(() => hero.classList.add('is-in'));
-  const fonts = document.fonts?.ready ?? Promise.resolve();
-  Promise.race([fonts, new Promise(r => setTimeout(r, 700))]).then(start);
-}
+// ---------- Movimento (taste-gsap) ----------
+// Tudo que se move fica num gsap.context + matchMedia. Com movimento reduzido,
+// sem GSAP ou sem JS, a página já está completa: os estados iniciais só
+// existem aqui dentro.
+const root = document.documentElement;
+const ready = () => root.classList.add('motion-ready');
 
-// ---------- Revelação de blocos ----------
-// Cada bloco entra uma vez. Os que entram no mesmo instante são escalonados em 80ms.
-const revealEls = document.querySelectorAll('[data-reveal], .office-window');
-const reveal = (el, delay) => {
-  if (delay) {
-    el.style.transitionDelay = `${delay}ms`;
-    el.addEventListener('transitionend', () => { el.style.transitionDelay = ''; }, { once: true });
-  }
-  el.classList.add('is-in');
-};
-if (hasIO) {
-  const io = new IntersectionObserver(entries => {
-    let i = 0;
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      reveal(entry.target, Math.min(i++, 4) * 80);
-      io.unobserve(entry.target);
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
-  revealEls.forEach(el => io.observe(el));
-} else {
-  revealEls.forEach(el => el.classList.add('is-in'));
-}
-
-// ---------- Mostrador das fases ----------
 const dial = document.querySelector('.dial-inner');
 const dialNum = document.querySelector('[data-dial-num]');
 const dialName = document.querySelector('[data-dial-name]');
@@ -106,39 +46,162 @@ const dialFill = document.querySelector('[data-dial-fill]');
 const phaseList = document.querySelector('.phase-list');
 const phases = [...document.querySelectorAll('.phase[data-phase]')];
 
-if (dial && dialNum && dialName && dialFill && phaseList && phases.length && hasIO) {
-  let current = null;
-  let swapTimer;
-  const setPhase = el => {
-    if (el === current) return;
-    current = el;
-    phases.forEach(p => p.classList.toggle('is-active', p === el));
-    const apply = () => { dialNum.textContent = el.dataset.phase; dialName.textContent = el.dataset.name; };
-    if (reduceMotion.matches) { apply(); return; }
-    clearTimeout(swapTimer);
-    dial.classList.add('is-swapping');
-    swapTimer = setTimeout(() => { apply(); dial.classList.remove('is-swapping'); }, 140);
-  };
-  const po = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) setPhase(e.target); });
-  }, { rootMargin: '-45% 0px -45% 0px' });
-  phases.forEach(p => po.observe(p));
-
-  // Progresso: a linha do mostrador acompanha a leitura das cinco fases.
-  let ticking = false;
-  const update = () => {
-    ticking = false;
-    const r = phaseList.getBoundingClientRect();
-    const mid = window.innerHeight / 2;
-    const p = Math.min(1, Math.max(0, (mid - r.top) / r.height));
-    dialFill.style.transform = `scaleY(${p.toFixed(4)})`;
-  };
-  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
-  new IntersectionObserver(([e]) => {
-    if (e.isIntersecting) { window.addEventListener('scroll', onScroll, { passive: true }); update(); }
-    else window.removeEventListener('scroll', onScroll);
-  }).observe(phaseList);
+let currentPhase = null;
+let swapTimer;
+function setPhase(el) {
+  if (!el || el === currentPhase || !dial || !dialNum || !dialName) return;
+  currentPhase = el;
+  phases.forEach(p => p.classList.toggle('is-active', p === el));
+  const apply = () => { dialNum.textContent = el.dataset.phase; dialName.textContent = el.dataset.name; };
+  if (reduceMotion.matches) { apply(); return; }
+  clearTimeout(swapTimer);
+  dial.classList.add('is-swapping');
+  swapTimer = setTimeout(() => { apply(); dial.classList.remove('is-swapping'); }, 140);
 }
+
+// Palavras do princípio, para o "dissolve" no pin (só desktop, só com movimento).
+const quote = document.querySelector('[data-dissolve]');
+let quoteWords = [];
+if (quote) {
+  const wrapWords = node => {
+    [...node.childNodes].forEach(child => {
+      if (child.nodeType === Node.TEXT_NODE) {
+        const frag = document.createDocumentFragment();
+        child.textContent.split(/(\s+)/).forEach(part => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.append(document.createTextNode(part)); return; }
+          const w = document.createElement('span');
+          w.className = 'qw';
+          w.textContent = part;
+          quoteWords.push(w);
+          frag.append(w);
+        });
+        child.replaceWith(frag);
+      } else {
+        wrapWords(child);
+      }
+    });
+  };
+  wrapWords(quote);
+}
+
+function startMotion() {
+  const { gsap, ScrollTrigger } = window;
+  if (!gsap || !ScrollTrigger) {
+    // Sem GSAP: página estática completa; o mostrador ainda acompanha a leitura.
+    ready();
+    document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-in'));
+    if (hasIO && phases.length) {
+      const po = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && setPhase(e.target)),
+        { rootMargin: '-45% 0px -45% 0px' });
+      phases.forEach(p => po.observe(p));
+    }
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.context(() => {
+    // Mostrador: numeral por fase (vale também com movimento reduzido, é informação)
+    phases.forEach(p => ScrollTrigger.create({
+      trigger: p, start: 'top center', end: 'bottom center',
+      onToggle: self => { if (self.isActive) setPhase(p); }
+    }));
+
+    const mm = gsap.matchMedia();
+
+    mm.add('(prefers-reduced-motion: reduce)', () => {
+      ready();
+      document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-in'));
+      if (dialFill) gsap.set(dialFill, { scaleY: 1 });
+    });
+
+    mm.add({
+      motion: '(prefers-reduced-motion: no-preference)',
+      desktop: '(min-width: 768px)'
+    }, context => {
+      const { desktop } = context.conditions;
+      if (!context.conditions.motion) return;
+
+      // --- Abertura: uma timeline, expo.out, abaixo de 1,4s ---
+      const hero = document.querySelector('.hero');
+      const heroTl = gsap.timeline({ defaults: { ease: 'expo.out' }, onStart: ready });
+      heroTl
+        .from('.hero-kicker', { autoAlpha: 0, y: 12, duration: .8 }, 0)
+        .from('.hero-title .line-in', { yPercent: 112, duration: 1.05, stagger: .11 }, .08)
+        .from(['.hero-sub', '.hero-actions'], { opacity: 0, y: 16, duration: .9, stagger: .1 }, .42)
+        .fromTo('.hero-photo .window-pane', { clipPath: 'inset(100% 0% 0% 0%)' },
+          { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.15, ease: 'expo.inOut' }, .12)
+        .from('.hero-photo img', { scale: 1.12, duration: 1.3 }, .12)
+        .from(['.hero-photo figcaption', '.concept'], { autoAlpha: 0, duration: .6, ease: 'power2.out' }, .95);
+
+      // --- Blocos: entram uma vez, em lote ---
+      const blocks = gsap.utils.toArray('[data-reveal]');
+      // opacity (não autoAlpha): o bloco continua focável pelo teclado antes de aparecer.
+      gsap.set(blocks, { opacity: 0, y: desktop ? 18 : 12 });
+      ScrollTrigger.batch(blocks, {
+        start: 'top 86%', once: true,
+        onEnter: batch => {
+          batch.forEach(el => el.classList.add('is-in'));
+          gsap.to(batch, { opacity: 1, y: 0, duration: .9, ease: 'power3.out', stagger: .08, overwrite: true });
+        }
+      });
+
+      // --- Foto do escritório: abre ao entrar ---
+      const office = document.querySelector('.office-window .window-pane');
+      if (office) {
+        gsap.fromTo(office, { clipPath: 'inset(7% 7% 7% 7%)' }, {
+          clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2, ease: 'power3.inOut',
+          scrollTrigger: { trigger: office, start: 'top 80%', once: true }
+        });
+      }
+
+      // --- Progresso de leitura no cabeçalho ---
+      const progress = document.querySelector('[data-progress]');
+      if (progress) {
+        gsap.to(progress, { scaleX: 1, ease: 'none',
+          scrollTrigger: { start: 0, end: 'max', scrub: .3 } });
+      }
+
+      // --- Mostrador: linha preenchida pela leitura ---
+      if (dialFill && phaseList) {
+        gsap.fromTo(dialFill, { scaleY: 0 }, { scaleY: 1, ease: 'none',
+          scrollTrigger: { trigger: phaseList, start: 'top center', end: 'bottom center', scrub: .6 } });
+      }
+
+      if (!desktop) return;
+
+      // --- Desktop: fotos deslizam dentro da moldura ---
+      gsap.utils.toArray('.window-pane').forEach(pane => {
+        pane.classList.add('has-drift');
+        gsap.fromTo(pane.querySelector('img'), { yPercent: 0 }, {
+          yPercent: -10, ease: 'none',
+          scrollTrigger: {
+            trigger: pane, scrub: .6, invalidateOnRefresh: true,
+            start: pane.closest('.hero') ? 'top top' : 'top bottom', end: 'bottom top'
+          }
+        });
+      });
+
+      // --- Desktop: o princípio fica fixo e as palavras assentam (único pin da página) ---
+      if (quote && quoteWords.length) {
+        gsap.fromTo(quoteWords, { opacity: .14 }, {
+          opacity: 1, ease: 'none', stagger: .12,
+          scrollTrigger: {
+            trigger: '.principle', start: 'center center', end: '+=140%',
+            pin: true, pinSpacing: true, scrub: .6, invalidateOnRefresh: true
+          }
+        });
+      }
+
+      return () => document.querySelectorAll('.has-drift').forEach(p => p.classList.remove('has-drift'));
+    });
+  });
+
+  // Fontes e imagens mudam as medidas: recalcula os gatilhos depois delas.
+  document.fonts?.ready.then(() => ScrollTrigger.refresh());
+  window.addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
+}
+startMotion();
 
 // ---------- Pré-atendimento ----------
 const TEXT = {

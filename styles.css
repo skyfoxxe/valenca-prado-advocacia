@@ -3,6 +3,10 @@
    um único acento latão. Sem branco puro, sem gradiente, sombra só no que flutua.
    Movimento: tokens de taste-motion + regras de animate/review-animations. */
 
+@font-face { font-family: 'Instrument Serif'; font-style: normal; font-weight: 400; font-display: swap; src: url(assets/fonts/instrument-serif.woff2) format('woff2'); }
+@font-face { font-family: 'Instrument Serif'; font-style: italic; font-weight: 400; font-display: swap; src: url(assets/fonts/instrument-serif-italic.woff2) format('woff2'); }
+@font-face { font-family: 'Instrument Sans'; font-style: normal; font-weight: 400 500; font-display: swap; src: url(assets/fonts/instrument-sans.woff2) format('woff2'); }
+
 :root {
   --ground: #F7F2EA;
   --panel: #EFE8DC;
@@ -124,11 +128,15 @@ h3 { font-size: clamp(1.7rem, 2.4vw, 2.1rem); line-height: 1.1; }
   background: var(--ground);
 }
 .top::after {
-  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
-  background: var(--rule); transform-origin: left; transform: scaleX(0);
-  transition: transform var(--dur-slow) var(--ease-io);
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--rule);
+  opacity: 0; transition: opacity var(--dur-slow) var(--ease-std);
 }
-.top.is-stuck::after { transform: scaleX(1); }
+.top.is-stuck::after { opacity: 1; }
+/* Progresso de leitura: linha fina em latão, preenchida pela rolagem (cinematic-motion, contido) */
+.top-progress {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 1px; z-index: 1;
+  background: var(--brass); transform-origin: left; transform: scaleX(0);
+}
 .top-row { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .mark {
   font: 400 1.45rem/1 var(--serif); text-decoration: none; white-space: nowrap; letter-spacing: .005em;
@@ -179,6 +187,7 @@ h3 { font-size: clamp(1.7rem, 2.4vw, 2.1rem); line-height: 1.1; }
 .window { margin-top: clamp(64px, 11vh, 120px); }
 .window-pane { overflow: hidden; aspect-ratio: 21 / 9; background: var(--panel); }
 .window-pane img { width: 100%; height: 100%; object-fit: cover; }
+.window-pane picture { display: contents; }
 .window figcaption { margin-top: 14px; }
 .concept { margin-top: 28px; font-size: 13px; color: var(--ink-soft); }
 
@@ -376,41 +385,20 @@ h3 { font-size: clamp(1.7rem, 2.4vw, 2.1rem); line-height: 1.1; }
 [data-placeholder] { text-decoration: underline dotted var(--brass); text-underline-offset: 4px; }
 
 /* =========================================================
-   Movimento — só com JS e sem pedido de movimento reduzido.
-   Sem esses dois, nada começa escondido.
+   Movimento
+   As entradas, o mostrador, o pin do princípio e o deslize das fotos são
+   feitos com GSAP + ScrollTrigger (script.js, taste-gsap): os estados
+   iniciais ficam no JS, dentro de matchMedia. Aqui ficam só a micro-
+   interação de interface e uma rede de segurança para a abertura.
    ========================================================= */
 @media (prefers-reduced-motion: no-preference) {
+  /* A abertura fica oculta só até o GSAP assumir. Se o JS falhar,
+     ela aparece sozinha em 1,6s. */
+  .js:not(.motion-ready) .hero-main, .js:not(.motion-ready) .hero-photo { animation: failsafe 0s 1.6s both; visibility: hidden; }
 
-  /* Título: cada palavra sobe de trás da própria máscara */
-  .js .hero-title .w { display: inline-block; overflow: clip; overflow-clip-margin: .14em; vertical-align: top; }
-  .js .hero-title .w > span { display: inline-block; transform: translateY(110%); transition: transform var(--dur-hero) var(--ease-out); }
-  .js .hero.is-in .hero-title .w > span { transform: none; }
-
-  .js [data-hero] { opacity: 0; transform: translateY(12px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
-  .js .hero.is-in [data-hero] { opacity: 1; transform: none; }
-  .js .hero.is-in [data-hero="3"] { transition-delay: 620ms; }
-  .js .hero.is-in [data-hero="4"] { transition-delay: 740ms; }
-
-  /* Foto de abertura: abre de baixo para cima, como uma janela */
-  .js .hero-photo .window-pane { clip-path: inset(100% 0 0 0); transition: clip-path 1100ms var(--ease-io) 500ms; }
-  .js .hero-photo img { scale: 1.08; transition: scale 1400ms var(--ease-out) 500ms; }
-  .js .hero.is-in .hero-photo .window-pane { clip-path: inset(0 0 0 0); }
-  .js .hero.is-in .hero-photo img { scale: 1; }
-  .js .hero-photo figcaption, .js .concept { opacity: 0; transition: opacity var(--dur-slow) var(--ease-std) 1300ms; }
-  .js .hero.is-in .hero-photo figcaption { opacity: .9; }
-  .js .hero.is-in .concept { opacity: 1; }
-
-  /* Blocos: uma entrada, 14px, 600ms */
-  .js [data-reveal] { opacity: 0; transform: translateY(14px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
-  .js [data-reveal].is-in { opacity: 1; transform: none; }
-
-  /* Linhas finas desenham como traço de caneta */
-  .js .phase::before, .js .ledger-row::before { transform: scaleX(0); transition: transform 1000ms var(--ease-io) 120ms; }
-  .js .phase.is-in::before, .js .ledger-row.is-in::before { transform: scaleX(1); }
-
-  /* Foto do escritório: abre ao entrar */
-  .js .office-window .window-pane { clip-path: inset(6% 6% 6% 6%); transition: clip-path 1100ms var(--ease-io); }
-  .js .office-window.is-in .window-pane { clip-path: inset(0 0 0 0); }
+  /* Linhas finas desenham como traço de caneta quando o bloco entra */
+  .motion-ready .phase::before, .motion-ready .ledger-row::before { transform: scaleX(0); transition: transform 1000ms var(--ease-io) 120ms; }
+  .motion-ready .phase.is-in::before, .motion-ready .ledger-row.is-in::before { transform: scaleX(1); }
 
   /* Diálogo: entra por escala, sai mais rápido */
   .sheet { opacity: 0; transform: scale(.96); transition: opacity 160ms var(--ease-std), transform 160ms var(--ease-std), overlay 160ms allow-discrete, display 160ms allow-discrete; }
@@ -422,16 +410,16 @@ h3 { font-size: clamp(1.7rem, 2.4vw, 2.1rem); line-height: 1.1; }
 
   /* FAQ: a resposta desce 4px */
   .faq details[open] p { animation: faq-in var(--dur-base) var(--ease-out); }
-
-  /* Fotos deslizam devagar dentro da moldura, ligadas à rolagem (compositor, sem JS) */
-  @supports (animation-timeline: view()) {
-    .window-pane img { height: 114%; animation: drift linear both; animation-timeline: view(); animation-range: cover; }
-    .hero-photo .window-pane img { animation-range: exit; }
-  }
 }
 
+/* Máscaras de linha do título (criadas pelo JS) */
+.hero-title .line { display: block; overflow: clip; overflow-clip-margin: .16em; }
+.hero-title .line-in { display: block; }
+/* Fotos com folga para o deslize */
+.motion-ready .window-pane.has-drift img { height: 112%; }
+
 @keyframes faq-in { from { opacity: 0; transform: translateY(-4px); } }
-@keyframes drift { from { translate: 0 0; } to { translate: 0 -12%; } }
+@keyframes failsafe { to { visibility: visible; } }
 
 /* =========================================================
    Responsivo
