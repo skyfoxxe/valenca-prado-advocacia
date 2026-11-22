@@ -26,6 +26,7 @@
   }
   </script>
 
+  <link rel="preconnect" href="https://images.unsplash.com">
   <link rel="preload" href="assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css" />
@@ -56,6 +57,9 @@
 
     <!-- Abertura: sala escura, título largo e o índice das cinco fases -->
     <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-statue" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1768839722927-df0ef3188f6d?auto=format&amp;fit=crop&amp;w=1600&amp;q=70" srcset="https://images.unsplash.com/photo-1768839722927-df0ef3188f6d?auto=format&amp;fit=crop&amp;w=900&amp;q=70 900w, https://images.unsplash.com/photo-1768839722927-df0ef3188f6d?auto=format&amp;fit=crop&amp;w=1600&amp;q=70 1600w, https://images.unsplash.com/photo-1768839722927-df0ef3188f6d?auto=format&amp;fit=crop&amp;w=2200&amp;q=65 2200w" sizes="100vw" width="1600" height="1067" alt="" fetchpriority="high">
+      </div>
       <div class="frame hero-inner">
         <div class="hero-meta">
           <p class="label">Advocacia empresarial e patrimonial</p>
@@ -89,13 +93,10 @@
     <!-- Passagem: a foto ocupa a largura toda e se abre com a rolagem -->
     <figure class="passage">
       <div class="passage-pane">
-        <picture>
-          <source media="(max-width: 760px)" srcset="assets/escritorio-corredor-retrato-480.webp 480w, assets/escritorio-corredor-retrato.webp 701w" sizes="100vw" width="701" height="935">
-          <img src="assets/escritorio-corredor.webp" srcset="assets/escritorio-corredor-800.webp 800w, assets/escritorio-corredor.webp 1400w" sizes="100vw" width="1400" height="934" alt="" loading="lazy" decoding="async">
-        </picture>
+        <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&amp;fit=crop&amp;w=1600&amp;q=70" srcset="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&amp;fit=crop&amp;w=800&amp;h=1000&amp;q=70 800w, https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&amp;fit=crop&amp;w=1600&amp;q=70 1600w, https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&amp;fit=crop&amp;w=2400&amp;q=65 2400w" sizes="100vw" width="1600" height="1067" alt="Biblioteca jurídica com estantes de livros antigos e bustos de mármore" loading="lazy" decoding="async">
       </div>
       <figcaption class="frame passage-cap">
-        <span class="label">Imagem ilustrativa</span>
+        <span class="label">Imagens ilustrativas · Unsplash</span>
         <span class="concept">Projeto conceitual de portfólio. O escritório, as pessoas, os números de OAB, o endereço e os contatos são fictícios.</span>
       </figcaption>
     </figure>
@@ -181,9 +182,12 @@
 
     <!-- Princípio -->
     <section class="principle" aria-label="Princípio do escritório">
-      <figure class="frame principle-inner" data-reveal>
-        <blockquote data-dissolve>Uma boa decisão jurídica raramente é a mais rápida. É a que continua fazendo sentido <em>dez anos depois.</em></blockquote>
-        <figcaption class="label">Princípio do escritório</figcaption>
+      <figure class="frame principle-inner">
+        <div class="principle-photo" data-reveal>
+          <img src="https://images.unsplash.com/photo-1589578527966-fdac0f44566c?auto=format&amp;fit=crop&amp;w=800&amp;q=70" srcset="https://images.unsplash.com/photo-1589578527966-fdac0f44566c?auto=format&amp;fit=crop&amp;w=500&amp;q=70 500w, https://images.unsplash.com/photo-1589578527966-fdac0f44566c?auto=format&amp;fit=crop&amp;w=800&amp;q=70 800w, https://images.unsplash.com/photo-1589578527966-fdac0f44566c?auto=format&amp;fit=crop&amp;w=1100&amp;q=65 1100w" sizes="(max-width: 760px) 70vw, 30vw" width="800" height="1200" alt="Estátua de bronze da Justiça segurando a balança e a espada" loading="lazy" decoding="async">
+        </div>
+        <blockquote data-dissolve data-reveal>Uma boa decisão jurídica raramente é a mais rápida. É a que continua fazendo sentido <em>dez anos depois.</em></blockquote>
+        <figcaption class="label" data-reveal>Princípio do escritório</figcaption>
       </figure>
     </section>
 

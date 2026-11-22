@@ -136,7 +136,14 @@ function startMotion() {
         .from('.hero-meta .label', { autoAlpha: 0, y: 8, duration: .7, stagger: .08 }, .15)
         .from('.hero-title .line-in', { yPercent: 108, duration: 1.1, stagger: .12 }, .1)
         .from('.hero-lead', { opacity: 0, y: 16, duration: .9 }, .5)
-        .from('[data-hero-index]', { opacity: 0, y: desktop ? 14 : 8, duration: .8, stagger: .06 }, .62);
+        .from('[data-hero-index]', { opacity: 0, y: desktop ? 14 : 8, duration: .8, stagger: .06 }, .62)
+        .from('.hero-statue', { opacity: 0, scale: 1.06, duration: 1.6, ease: 'power2.out' }, 0);
+
+      // A estátua recua devagar enquanto a sala sai de cena
+      if (desktop) {
+        gsap.to('.hero-statue img', { yPercent: 8, ease: 'none',
+          scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .6 } });
+      }
 
       // --- Passagem: a foto se abre de uma fresta até a largura toda ---
       const passage = document.querySelector('.passage-pane');
