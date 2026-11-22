@@ -143,7 +143,9 @@ h3 { font-size: clamp(1.7rem, 2.4vw, 2.1rem); line-height: 1.1; }
 }
 .top.is-stuck::after { opacity: 1; }
 /* Sobre a abertura o cabeçalho veste as cores da sala escura */
-.top { transition: background-color var(--dur-slow) var(--ease-std), color var(--dur-slow) var(--ease-std); }
+.top, .top .mark, .top .mark i, .top .nav a, .top .nav-toggle {
+  transition: background-color var(--dur-slow) var(--ease-std), color var(--dur-slow) var(--ease-std), border-color var(--dur-slow) var(--ease-std);
+}
 .top.on-hero {
   --ink: var(--on-deep); --ground: var(--deep); --rule: var(--on-deep-rule); --accent: var(--accent-on-deep);
   color: var(--on-deep);
